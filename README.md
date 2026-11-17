@@ -24,6 +24,10 @@ The welcome page is the current completed design. The study is the existing vers
 
 ## Hosting
 
-Deploy `dist/` to any static host. The current hosted site is https://laraib-nadeem-folio-26.tdrmnjprr8.chatgpt.site.
+Deploy the existing GitHub repository to a Vercel personal account on the free Hobby plan.
+
+The root `vercel.json` publishes `dist/` directly, with no framework, dependency installation, or build command. Import the repository with its root directory left at the repository root and use `main` as the production branch. Keep the Vercel GitHub integration connected so pushes to `main` automatically redeploy production.
+
+The site has no ChatGPT authentication. Leave production deployment protection disabled to allow recruiters to view it without logging in. The previous ChatGPT-hosted site is https://laraib-nadeem-folio-26.tdrmnjprr8.chatgpt.site.
 
 Third-party libraries, fonts, and images retain their respective licenses. Tommy's included demo font is for personal use; see `font-licenses/tommy.txt`.
