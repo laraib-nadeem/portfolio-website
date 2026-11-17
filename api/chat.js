@@ -37,10 +37,6 @@ export default async function handler(req, res) {
     const detail = String(error.message || '') + String(error.cause?.message || '');
     const reason = /customer_verification_required|payment method|verify your/i.test(detail) ? 'verification_required' : /insufficient_funds|credits|balance/i.test(detail) ? 'credits_required' : /unauthorized|authentication|OIDC|API key/i.test(detail) ? 'authentication_required' : 'request_failed';
     console.error('Portfolio assistant request failed',{name:error.name,status:error.statusCode,reason});
-    if (error.statusCode === 404) {
-      const catalog = await fetch('https://generativelanguage.googleapis.com/v1beta/models', {headers:{'x-goog-api-key':process.env.GOOGLE_GENERATIVE_AI_API_KEY},signal:AbortSignal.timeout(3000)}).then(r=>r.json()).catch(()=>({}));
-      console.info('Available Gemini text models', (catalog.models||[]).filter(m=>m.supportedGenerationMethods?.includes('generateContent') && /flash/.test(m.name)).map(m=>m.name));
-    }
     if (error.statusCode === 429) { res.setHeader('Retry-After', '60'); return res.status(429).json({error:'Smiski’s free AI quota is taking a breather. Please try again later, or use the links below.'}); }
     return res.status(503).json({error:'Smiski couldn’t connect right now. Please try again shortly, or explore the résumé and projects below.'});
   }
