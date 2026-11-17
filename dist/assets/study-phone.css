@@ -96,3 +96,4 @@ body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 
 /* User-selected envelope and telephone artwork on the directory buttons. */
 .inside-view .room-directory .directory-art{display:block;width:32px;height:32px;flex:0 0 32px;object-fit:cover;border-radius:50%;margin:-3px 0}
+@media(max-width:350px){.inside-view .room-directory .directory-art{width:24px;height:24px;flex-basis:24px}}
