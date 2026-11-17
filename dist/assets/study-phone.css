@@ -60,3 +60,5 @@ body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 .inside-view .room-frame.projects-hover .projects-frame-label,.inside-view .room-frame .projects-frame-label:focus-visible{opacity:1}
 .inside-view .room-frame .projects-frame-label:focus-visible{pointer-events:auto}
 @media(prefers-reduced-motion:reduce){.inside-view .room-frame .projects-frame-label{transition:none}}
+/* Restore only the three frame tooltips; other room labels stay hidden. */
+.inside-view .room-frame .github-object,.inside-view .room-frame .linkedin-object{display:flex}
