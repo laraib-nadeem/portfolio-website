@@ -139,8 +139,8 @@ window.openDeskEnvelope=()=>new Promise(resolve=>{
  .to(envelope.rotation,{x:0,y:facing,z:0,duration:.65,ease:'power2.inOut'},0)
  .to(camera,{left:uprightCenter.x-halfW,right:uprightCenter.x+halfW,top:uprightCenter.y+halfH,bottom:uprightCenter.y-halfH,zoom,duration:.7,ease:'power2.inOut'},.05)
  .to(flapHinge.rotation,{x:2.65,duration:.5,ease:'power2.inOut'},.72)
- .to(insert.position,{y:.92,z:0,duration:.85,ease:'power3.out'},1.23)
- .to(insert.position,{y:1.04,duration:.25,ease:'sine.out'},2.08);
+ .to(insert.position,{y:.45,z:0,duration:.8,ease:'power2.out'},1.23)
+ .to(insert.position,{y:1.20,duration:.5,ease:'power2.inOut'},2.60);
 });
 window.resetDeskEnvelope=()=>{host.classList.remove('is-opening-envelope');envelopeTween?.kill();envelopeResolve?.();envelopeResolve=null;if(envelopeCamera){Object.assign(camera,envelopeCamera);envelopeCamera=null;}envelope.position.set(.35,1.405,.95);envelope.rotation.set(-Math.PI/2,0,-.1);flapHinge.rotation.x=0;insert.position.set(0,-.18,0);insert.scale.y=1;render();};
 const cat=group(-2.1,.3,1.0,'resume');ball(0,.15,0,.34,.17,.22,'#ead5b1',cat);ball(.18,.28,.07,.18,.17,.17,'#efdfc1',cat);for(const side of [-1,1]){const ear=m(new THREE.ConeGeometry(.06,.14,3),'#c59c74',cat);ear.position.set(.18+side*.1,.44,.06);ball(.18+side*.055,.3,.23,.012,.009,.01,'#4d5137',cat);}const tail=m(new THREE.TorusGeometry(.13,.04,8,20,Math.PI*1.6),'#b08a64',cat);tail.rotation.x=Math.PI/2;tail.position.set(-.2,.15,-.06);
@@ -153,7 +153,8 @@ const markers={projectFrame:new THREE.Vector3(-1.65,2.62,-1.60),github:new THREE
 let visible=false,frame,last=0,target=0,drag=null,dragged=false;const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();
 function markerPositions(){const rect=host.getBoundingClientRect();const r={width:host.clientWidth||rect.width,height:host.clientHeight||rect.height};if(!r.width)return;const placed=[];for(const[name,point]of Object.entries(markers)){const el=host.querySelector('[data-target="'+name+'"]');if(!el)continue;const p=point.clone().applyMatrix4(room.matrixWorld).project(camera),width=el.offsetWidth||90;let x=Math.min(r.width-width/2-8,Math.max(width/2+8,(p.x+1)*r.width/2)),y=(-p.y+1)*r.height/2;for(const prev of placed)if(Math.abs(x-prev.x)<(width+prev.width)/2+7&&Math.abs(y-prev.y)<48)y=prev.y+51;y=Math.max(42,Math.min(r.height-65,y));placed.push({x,y,width});el.style.left=x+'px';el.style.top=y+'px';}}
 function updateResumePaper(){
- const top=.6,bottom=-.6,mouth=.47;
+ const top=.6,bottom=-.6,mouth=-.44;
+ // Clip only at the pocket bottom; let the sheet show inside the V-shaped opening.
  const visibleBottom=Math.max(bottom,mouth-insert.position.y);
  insert.visible=visibleBottom<top;
  if(!insert.visible)return;
