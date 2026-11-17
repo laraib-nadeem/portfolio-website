@@ -115,7 +115,7 @@ const envelope=group(.35,1.405,.95,'resume');envelope.name='resume-envelope';env
 // Actual pocket depth: backing behind paper, sewn front folds in front.
 const envelopeBack=m(new THREE.BoxGeometry(1.37,.92,.02),denim,envelope);envelopeBack.name='envelope-pocket-back';envelopeBack.position.z=-.04;
 function fabricTriangle(points,parent,color){const shape=new THREE.Shape();shape.moveTo(points[0][0],points[0][1]);for(const p of points.slice(1))shape.lineTo(p[0],p[1]);shape.closePath();return m(new THREE.ShapeGeometry(shape),color,parent);}
-const insert=m(new THREE.PlaneGeometry(1.15,1.2),new THREE.MeshBasicMaterial({map:paperTex,side:THREE.DoubleSide}),envelope);insert.name='resume-insert';insert.position.set(0,-.03,0);insert.scale.y=.61;
+const insert=m(new THREE.PlaneGeometry(1.15,1.2),new THREE.MeshBasicMaterial({map:paperTex,side:THREE.DoubleSide}),envelope);insert.name='resume-insert';insert.position.set(0,-.18,0);insert.scale.y=1;
 const leftFold=fabricTriangle([[-.68,-.46],[-.68,.46],[.2,-.12]],envelope,denimDark);leftFold.position.z=.045;
 const rightFold=fabricTriangle([[.68,-.46],[.68,.46],[-.2,-.12]],envelope,denimDark);rightFold.position.z=.047;
 const lowerFold=fabricTriangle([[-.68,-.46],[.68,-.46],[0,.12]],envelope,denim);lowerFold.position.z=.055;
@@ -140,10 +140,9 @@ window.openDeskEnvelope=()=>new Promise(resolve=>{
  .to(camera,{left:uprightCenter.x-halfW,right:uprightCenter.x+halfW,top:uprightCenter.y+halfH,bottom:uprightCenter.y-halfH,zoom,duration:.7,ease:'power2.inOut'},.05)
  .to(flapHinge.rotation,{x:2.65,duration:.5,ease:'power2.inOut'},.72)
  .to(insert.position,{y:.92,z:0,duration:.85,ease:'power3.out'},1.23)
- .to(insert.scale,{y:1,duration:.7,ease:'power2.out'},1.23)
  .to(insert.position,{y:1.04,duration:.25,ease:'sine.out'},2.08);
 });
-window.resetDeskEnvelope=()=>{host.classList.remove('is-opening-envelope');envelopeTween?.kill();envelopeResolve?.();envelopeResolve=null;if(envelopeCamera){Object.assign(camera,envelopeCamera);envelopeCamera=null;}envelope.position.set(.35,1.405,.95);envelope.rotation.set(-Math.PI/2,0,-.1);flapHinge.rotation.x=0;insert.position.set(0,-.03,0);insert.scale.y=.61;render();};
+window.resetDeskEnvelope=()=>{host.classList.remove('is-opening-envelope');envelopeTween?.kill();envelopeResolve?.();envelopeResolve=null;if(envelopeCamera){Object.assign(camera,envelopeCamera);envelopeCamera=null;}envelope.position.set(.35,1.405,.95);envelope.rotation.set(-Math.PI/2,0,-.1);flapHinge.rotation.x=0;insert.position.set(0,-.18,0);insert.scale.y=1;render();};
 const cat=group(-2.1,.3,1.0,'resume');ball(0,.15,0,.34,.17,.22,'#ead5b1',cat);ball(.18,.28,.07,.18,.17,.17,'#efdfc1',cat);for(const side of [-1,1]){const ear=m(new THREE.ConeGeometry(.06,.14,3),'#c59c74',cat);ear.position.set(.18+side*.1,.44,.06);ball(.18+side*.055,.3,.23,.012,.009,.01,'#4d5137',cat);}const tail=m(new THREE.TorusGeometry(.13,.04,8,20,Math.PI*1.6),'#b08a64',cat);tail.rotation.x=Math.PI/2;tail.position.set(-.2,.15,-.06);
 // A mushroom task lamp is a real light switch, not an unrelated decoration.
 const mushroom=group(-1.3,1.4,-.05,'lamp');rod([0,0,0],[0,.33,0],.05,'#d8cba7',mushroom);ball(0,.35,0,.24,.12,.22,'#c2825d',mushroom);for(const[x,z]of [[-.1,.06],[.08,.08],[.04,-.08]])ball(x,.43,z,.035,.015,.035,'#f3e4c2',mushroom);const lampLight=new THREE.PointLight(0xffcf83,0,4);lampLight.position.set(-1.1,1.85,.5);room.add(lampLight);
@@ -153,7 +152,16 @@ const notes=group(2.05,.35,1.2,'resume');for(let i=0;i<3;i++){const b=cube(0,i*.
 const markers={projectFrame:new THREE.Vector3(-1.65,2.62,-1.60),github:new THREE.Vector3(-2.70,2.35,-.65),linkedin:new THREE.Vector3(-2.70,2.35,.9),resume:new THREE.Vector3(.3,1.4,1.05),projects:new THREE.Vector3(-1.75,1.45,-.9),education:new THREE.Vector3(1.45,2.1,-1.7),contact:new THREE.Vector3(1.55,1.45,1.05)};
 let visible=false,frame,last=0,target=0,drag=null,dragged=false;const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();
 function markerPositions(){const rect=host.getBoundingClientRect();const r={width:host.clientWidth||rect.width,height:host.clientHeight||rect.height};if(!r.width)return;const placed=[];for(const[name,point]of Object.entries(markers)){const el=host.querySelector('[data-target="'+name+'"]');if(!el)continue;const p=point.clone().applyMatrix4(room.matrixWorld).project(camera),width=el.offsetWidth||90;let x=Math.min(r.width-width/2-8,Math.max(width/2+8,(p.x+1)*r.width/2)),y=(-p.y+1)*r.height/2;for(const prev of placed)if(Math.abs(x-prev.x)<(width+prev.width)/2+7&&Math.abs(y-prev.y)<48)y=prev.y+51;y=Math.max(42,Math.min(r.height-65,y));placed.push({x,y,width});el.style.left=x+'px';el.style.top=y+'px';}}
-function render(){camera.updateProjectionMatrix();scene.updateMatrixWorld(true);camera.updateMatrixWorld(true);renderer.render(scene,camera);markerPositions();}
+function updateResumePaper(){
+ const top=.6,bottom=-.6,mouth=.47;
+ const visibleBottom=Math.max(bottom,mouth-insert.position.y);
+ insert.visible=visibleBottom<top;
+ if(!insert.visible)return;
+ const positions=insert.geometry.attributes.position,uv=insert.geometry.attributes.uv;
+ positions.setY(2,visibleBottom);positions.setY(3,visibleBottom);positions.needsUpdate=true;
+ const uvBottom=(visibleBottom-bottom)/(top-bottom);uv.setY(2,uvBottom);uv.setY(3,uvBottom);uv.needsUpdate=true;
+}
+function render(){updateResumePaper();camera.updateProjectionMatrix();scene.updateMatrixWorld(true);camera.updateMatrixWorld(true);renderer.render(scene,camera);markerPositions();}
 function size(){const rect=host.getBoundingClientRect(),r={width:host.clientWidth||rect.width,height:host.clientHeight||rect.height};if(!r.width||!r.height)return;camera.updateMatrixWorld(true);room.updateMatrixWorld(true);const bounds=new THREE.Box3().setFromObject(room),corners=[];for(const x of [bounds.min.x,bounds.max.x])for(const y of [bounds.min.y,bounds.max.y])for(const z of [bounds.min.z,bounds.max.z])corners.push(new THREE.Vector3(x,y,z).applyMatrix4(camera.matrixWorldInverse));const xs=corners.map(p=>p.x),ys=corners.map(p=>p.y),minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys),aspect=r.width/r.height;const height=Math.max(maxY-minY,(maxX-minX)/aspect)*1.12,cx=(minX+maxX)/2,cy=(minY+maxY)/2;camera.left=cx-height*aspect/2;camera.right=cx+height*aspect/2;camera.top=cy+height/2;camera.bottom=cy-height/2;camera.updateProjectionMatrix();renderer.setSize(r.width,r.height,false);render();}
 function tick(t){frame=requestAnimationFrame(tick);if(!visible||document.hidden||t-last<40)return;const dt=last?Math.min((t-last)/1000,.1):0;last=t;const moving=window.portfolioMotionPlaying;if(moving){avatar.scale.y=1+Math.sin(t*.0015)*.008;if(waveRemaining>0){waveRemaining=Math.max(0,waveRemaining-dt);waveArm.rotation.z=-.9+Math.sin(waveRemaining*13)*.32;head.rotation.z=Math.sin(waveRemaining*3)*.055;}else{waveArm.rotation.z=-.3;head.rotation.z=0;}room.rotation.y+=(target-room.rotation.y)*.1;cat.scale.y=1+Math.sin(t*.002)*.025;bunny.rotation.y=Math.sin(t*.001)*.1;}render();}
 function act(route){if(route==='avatar'){window.waveLaraib();return;}if(route==='github'||route==='linkedin'){document.querySelector('#'+route+'-wall-link')?.click();return;}if(route==='lamp'){document.querySelector('#lamp-switch').click();return;}window.location.hash=route;}
