@@ -65,7 +65,7 @@ const windowG=group(1.45,2.12,-1.9,'education');cube(0,0,0,1.55,1.88,.12,.62,'#d
 const shelf=group(-1.73,1.25,-1.47,'projects');cube(0,0,0,1.9,.14,.7,.05,'#b88c5c',shelf);cube(-.7,-.22,-.12,.12,.38,.35,.03,'#a4794c',shelf);cube(.7,-.22,-.12,.12,.38,.35,.03,'#a4794c',shelf);for(let i=0;i<4;i++){const book=cube(-.68+i*.19,.37,.0,.16,.6+(i%2)*.14,.4,.025,['#728d64','#e2bd69','#b35e4c','#d9d0af'][i],shelf);book.rotation.z=i===1?-.12:0;}
 const sonny=group(-1.05,1.76,-1.32,'projects');const sonnyPhoto=photo('assets/trinkets/sonny-angel.jpg',1.02,1.02,sonny,true);sonnyPhoto.rotation.y=.48;
 // Framed portrait, real photo, mounted above the project shelf.
-const portrait=group(-1.65,2.62,-1.82,'resume');cube(0,0,0,1.18,1.3,.12,.04,'#a47a51',portrait);cube(0,0,.08,1.02,1.14,.03,.02,'#f4e4bc',portrait);const portraitPhoto=photo('assets/laraib-portrait.png',.9,1.08,portrait);portraitPhoto.position.z=.112;
+const portrait=group(-1.65,2.62,-1.82,'projects');portrait.name='projects-wall-frame';cube(0,0,0,1.18,1.3,.12,.04,'#a47a51',portrait);cube(0,0,.08,1.02,1.14,.03,.02,'#f4e4bc',portrait);const portraitPhoto=photo('assets/laraib-portrait.png',.9,1.08,portrait);portraitPhoto.position.z=.112;
 // Framed GitHub print on the left wall, linked to Laraib's profile.
 const githubFrame=group(-2.82,2.35,-.65,'github');githubFrame.name='github-wall-frame';githubFrame.rotation.y=Math.PI/2;
 cube(0,0,0,1.42,1.35,.13,.055,'#ad8959',githubFrame);cube(0,0,.079,1.28,1.21,.035,.025,'#daceaa',githubFrame);
