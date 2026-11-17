@@ -114,3 +114,12 @@ body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 @keyframes tulip-sway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
 body.paused .study-tulips .tulip-sway,body:not([data-view="inside"]) .study-tulips .tulip-sway{animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){.study-tulips .tulip-sway{animation:none;transform:none}}
+/* Fuller tulip border with tiny, decorative crawling ladybugs. */
+.inside-view .study-tulips{overflow:visible}
+.study-tulips>g:nth-of-type(3n+1) .tulip-sway{animation-duration:4.2s;animation-delay:-1.4s}
+.study-tulips>g:nth-of-type(3n+2) .tulip-sway{animation-duration:3.6s;animation-delay:-2.3s}
+.ladybug-walk{offset-distance:0%;offset-rotate:auto 90deg;animation:ladybug-crawl 32s linear infinite;pointer-events:none}
+.ladybug-2{animation-duration:39s;animation-delay:-14s}.ladybug-3{animation-duration:46s;animation-delay:-24s}
+@keyframes ladybug-crawl{to{offset-distance:100%}}
+body.paused .ladybug-walk,body.placement-mode .ladybug-walk,body:not([data-view="inside"]) .ladybug-walk{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.ladybug-walk{animation:none;offset-distance:35%}}
