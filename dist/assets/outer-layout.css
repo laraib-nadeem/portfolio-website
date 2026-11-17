@@ -1,0 +1,146 @@
+/* One centered composition at every viewport. */
+.outside-view{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;grid-template-columns:none;grid-template-rows:none;height:auto;max-height:none;min-height:calc(100svh - 65px);max-width:1120px;padding:12px 28px 30px;gap:0}.welcome{width:100%;text-align:center;align-self:auto;padding:0;grid-column:auto;grid-row:auto}.hanging-name{width:min(340px,82vw);max-width:340px;left:auto;transform:none;margin:0 auto}.hanging-name .wordmark-title,.welcome .wordmark-title{width:100%;max-width:none;left:auto;transform:none;margin:0}.bird-delivery{width:min(560px,calc(100% - 36px));max-width:none;margin:12px auto 0}.carried-message{font-family:'Archivo Black',Arial,sans-serif;font-size:clamp(17px,2.2vw,25px);font-weight:400;letter-spacing:-.055em;line-height:1.22;text-align:center;color:#fff2d8;max-width:32ch;margin:0 auto;text-wrap:balance}.outside-scene{flex:none;grid-column:auto;grid-row:auto;width:min(960px,100%);height:clamp(480px,61svh,720px);min-height:480px;margin:14px auto 0;overflow:visible;isolation:isolate}.outside-scene>canvas,.outside-image{z-index:1}.outside-scene #hero-ascii{z-index:2}.outside-scene .art-mode{z-index:5}.entry-footer{width:100%;text-align:center;align-self:auto;grid-column:auto;grid-row:auto;padding-top:3px}.entry-footer>p{font-size:16px;text-align:center;max-width:none;margin:0 auto 16px}.enter-link{margin:0 auto;min-width:270px}.direct-resume{margin:10px auto 0;display:flex;width:max-content;max-width:100%;text-align:center;justify-content:center}.intro-bird{right:-24px}.bird-tether{right:-28px}
+@media(max-width:760px){.outside-view{min-height:calc(100svh - 58px);padding:10px 14px 25px}.hanging-name{width:min(310px,82vw);max-width:310px;left:auto;transform:none;margin:0 auto}.hanging-name .wordmark-title,.welcome .wordmark-title{width:100%;max-width:none;left:auto;transform:none;margin:0}.bird-delivery{width:calc(100% - 38px);max-width:34ch;margin:12px auto 0}.carried-message{font-size:18px;line-height:1.25;letter-spacing:-.055em;max-width:28ch}.outside-scene{width:100%;height:clamp(430px,56svh,560px);min-height:430px;margin-top:16px}.entry-footer{padding-top:0}.entry-footer>p{font-size:15px;line-height:1.5;margin:0 auto 15px}.enter-link{width:100%;min-width:0;max-width:350px}.intro-bird{right:-24px;top:-41px}.bird-tether{right:-28px;top:-17px}.ascii-bloom-field{inset:-2% -4% 0}.outside-scene .ascii-flower{font-size:7px;opacity:.64}.bloom-daisy{left:-58px;top:32%}.bloom-star{right:-54px;top:3%;font-size:7.5px!important}.bloom-rose{right:-42px;bottom:6%;font-size:6px!important}.bloom-clover{left:-24px;bottom:4%;font-size:6px!important}.art-mode{font-size:11px}}
+@media(max-width:360px){.hanging-name{width:82vw;max-width:285px}.carried-message{font-size:16px;max-width:27ch}.outside-scene{height:420px;min-height:420px}.bird-delivery{width:calc(100% - 32px)}.bloom-daisy{left:-67px}.bloom-star{right:-67px}}
+@media(prefers-reduced-motion:reduce){.ascii-flower{will-change:auto}}
+
+/* A continuous dotted garden, behind the entire welcome composition. */
+.outside-view{isolation:isolate;max-width:none}
+.dot-flower-field{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none;user-select:none}
+.dot-bloom{position:absolute;left:var(--x);top:var(--y);width:var(--size);aspect-ratio:1;opacity:.48;color:var(--color);animation:dotted-turn var(--speed) linear infinite;animation-delay:var(--delay);transform-origin:center;will-change:transform}
+.dot-bloom:nth-child(even){animation-direction:reverse}
+.dot-bloom svg{display:block;width:100%;height:100%;overflow:visible}
+.entry-footer{position:relative;z-index:2}
+@keyframes dotted-turn{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+@media(max-width:760px){.dot-bloom{width:var(--mobile-size);opacity:.46}}
+@media(prefers-reduced-motion:reduce){.dot-bloom{animation:none;transform:translate(-50%,-50%);will-change:auto}}
+/* The bird delivers a contrasting paper label. */
+.carried-message{background:#c9d6a9;color:#203a29;padding:14px 22px;border:1px solid #e0e8c4;border-radius:2px;box-shadow:3px 5px 0 #0c1d1766,inset 0 1px 0 #edf1d6;max-width:32ch}
+@media(max-width:760px){.carried-message{padding:12px 14px;max-width:28ch}}
+@font-face{font-family:'Great Vibes';font-style:normal;font-weight:400;font-display:swap;src:url('great-vibes.ttf') format('truetype')}
+/* Scissor-cut pale paper and long calligraphic strokes, like the supplied label. */
+.bird-delivery{filter:drop-shadow(5px 7px 0 #071b1666)}
+.carried-message{position:relative;isolation:isolate;background:none;border:0;border-radius:0;box-shadow:none;font-family:'Great Vibes',cursive;font-size:clamp(33px,4vw,43px);font-weight:400;line-height:1.13;letter-spacing:0;color:#294832;padding:21px 32px 23px;max-width:560px;text-wrap:balance}
+.carried-message:before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,#d8dfb7 0%,#f2f2cf 43%,#e5e9c1 68%,#cdd7aa 100%);clip-path:polygon(0 35%,7% 5%,24% 7%,34% 3%,48% 10%,61% 1%,78% 6%,86% 16%,97% 11%,100% 44%,96% 88%,83% 85%,70% 97%,52% 90%,39% 94%,26% 86%,12% 99%,3% 78%)}
+@media(max-width:760px){.bird-delivery{width:calc(100% - 14px);max-width:420px}.carried-message{font-size:32px;padding:21px 22px 23px;max-width:none}}
+@media(max-width:360px){.carried-message{font-size:29px;padding:19px 18px 21px}}
+
+/* Phase gates prevent other scripts from revealing later scenes early. */
+html.arrival-pending:not(.arrival-safe):not(.arrival-name) .hanging-name,
+html.arrival-pending:not(.arrival-safe):not(.arrival-label) .bird-delivery,
+html.arrival-pending:not(.arrival-safe):not(.arrival-house) #outside-scene,
+html.arrival-pending:not(.arrival-safe):not(.arrival-house) .entry-footer,
+html.arrival-pending:not(.arrival-safe):not(.arrival-house) .app-header,
+html.arrival-pending:not(.arrival-safe):not(.arrival-flowers) .dot-flower-field{visibility:hidden!important;pointer-events:none!important}
+.outside-scene{width:min(720px,100%);height:clamp(360px,48svh,520px);min-height:360px}
+@media(max-width:760px){.outside-scene{height:clamp(330px,43svh,440px);min-height:330px}}
+
+/* Phone-first single-screen composition, also kept proportional on desktop. */
+body[data-view="outside"] .app-header{height:48px;max-width:460px;padding:0 18px;gap:12px}
+body[data-view="outside"] .app-header>span{font-size:12px}
+body[data-view="outside"] .signature{font-size:24px}
+body[data-view="outside"] .motion-toggle{font-size:12px;min-height:34px;padding:4px 13px}
+.outside-view{width:100%;max-width:460px;height:calc(100svh - 48px);min-height:0;padding:8px 18px 16px;display:grid;grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr) auto;gap:4px;overflow:hidden}
+.welcome{width:100%;padding:0;grid-column:1;grid-row:1}
+.hanging-name{width:min(235px,30svh,70vw);max-width:235px;margin:0 auto;left:auto;transform:none}
+.bird-delivery{width:100%;max-width:380px;margin:5px auto 0}
+.carried-message{font-size:29px;line-height:1.08;padding:15px 20px 17px;max-width:none}
+.outside-scene{grid-column:1;grid-row:2;width:100%;height:100%;min-height:0;max-height:none;margin:0 auto;align-self:stretch}
+.entry-footer{grid-column:1;grid-row:3;padding:0;width:100%}
+.entry-footer>p{font-size:13px;line-height:1.4;margin:0 auto 9px}
+.enter-link{width:100%;max-width:330px;min-width:0;min-height:48px;padding:9px 18px;font-size:17px}
+.direct-resume{font-size:11px;line-height:1.4;margin:7px auto 0}
+.dot-bloom{width:var(--mobile-size);opacity:.36}
+@media(max-height:700px){.hanging-name{width:min(195px,28svh)}.carried-message{font-size:25px;padding:12px 18px 14px}.entry-footer>p{display:none}.outside-view{padding-bottom:10px}.bird-delivery{margin-top:0}}
+
+/* Safari's visible viewport owns the welcome screen; the study can still scroll. */
+body[data-view="outside"]{position:fixed;inset:0;height:var(--phone-height,100dvh);min-height:0;overflow:hidden;overscroll-behavior:none}
+body[data-view="outside"] .app-header{position:absolute;top:0;left:0;right:0;width:100%;height:calc(48px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px)}
+body[data-view="outside"] #portfolio{position:absolute;inset:calc(48px + env(safe-area-inset-top,0px)) 0 0;min-height:0;overflow:hidden}
+body[data-view="outside"] .outside-view{height:100%;min-height:0;padding-bottom:max(14px,env(safe-area-inset-bottom,0px));padding-top:28px;grid-template-rows:auto minmax(0,1fr) auto}
+.hanging-name:before{content:'';position:absolute;top:-24px;left:17%;right:17%;height:8px;border-radius:6px;background:linear-gradient(#e5cf98,#9f895a);box-shadow:0 3px 0 #071b1655;z-index:3}
+.hanging-name:after{content:'';position:absolute;top:-23px;left:calc(27% - 3px);width:6px;height:6px;border-radius:50%;background:#5e553c;box-shadow:calc(.46 * min(235px,30svh,70vw)) 0 0 #5e553c;z-index:4}
+.sign-chain{top:-18px!important}
+@media(max-height:700px){.hanging-name:after{box-shadow:calc(.46 * min(195px,28svh)) 0 0 #5e553c}.carried-message{font-size:25px}.outside-view .entry-footer{padding-top:0}}
+@font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:swap;src:url('anton.ttf') format('truetype')}
+/* Condensed display fallback until the supplied Bootzy font is available. */
+.carried-message{font-family:'Bootzy Condensed','Anton','Arial Narrow',sans-serif;font-size:29px;font-weight:400;font-style:normal;line-height:1.08;letter-spacing:-.015em;text-transform:uppercase;padding:17px 24px 19px}
+@media(max-height:700px){.carried-message{font-size:25px;padding:13px 22px 15px}}
+/* Reference backing: black printed paper, cream lettering, a strip of tan tape. */
+.carried-message{color:#f4f1e8;padding:17px 15px 18px}
+.carried-message:before{inset:0;background-color:#161514;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' opacity='.12' filter='url(%23n)' d='M0 0h180v100H0z'/%3E%3C/svg%3E");clip-path:polygon(0 2%,99% 0,100% 98%,1% 100%);transform:rotate(-1deg)}
+.carried-message:after{content:'';position:absolute;right:-3px;top:-6px;width:69px;height:20px;transform:rotate(7deg);background:linear-gradient(115deg,#cab57de6,#eedfa9ed 54%,#cdbb89ed);clip-path:polygon(1% 0,97% 4%,94% 25%,100% 42%,96% 64%,100% 95%,3% 100%,6% 77%,0 57%,5% 34%);box-shadow:0 1px 2px #0003;pointer-events:none}
+/* Compact beige label with the same warm red as the name. */
+.bird-delivery{width:88%;max-width:310px;filter:drop-shadow(2px 3px 0 #071b1644)}
+.carried-message{color:#a72a25;font-size:23px;line-height:1.1;letter-spacing:0;padding:10px 12px 11px}
+.carried-message:before{background-color:#e9ddbd}
+.carried-message:after{width:43px;height:13px;top:-4px;right:0;opacity:.85}
+@media(max-height:700px){.carried-message{font-size:21px;padding:8px 11px 9px}}
+/* Small evenly dotted blooms throughout, with the same five-petal silhouette. */
+.dot-bloom{width:clamp(60px,18vw,82px);opacity:.35}
+
+.dot-bloom{opacity:.5}
+
+.house-caption{position:absolute;left:0;right:0;bottom:2%;z-index:3;text-align:center;font:500 17px/1.35 var(--body);color:#fff0ce;margin:0;pointer-events:none;text-shadow:0 1px 5px #162b22}
+@media(max-height:700px){.house-caption{font-size:16px;bottom:0}}
+
+@font-face{font-family:'Pixelify Sans';font-style:normal;font-weight:700;font-display:swap;src:url('pixelify-sans.ttf') format('truetype')}
+.house-caption{left:50%;right:auto;bottom:1%;width:max-content;max-width:95%;transform:translateX(-50%) rotate(-2deg);display:flex;align-items:center;justify-content:center;gap:11px;padding:7px 17px 9px;border-radius:48% 43% 45% 42% / 45% 54% 44% 54%;background:#31523a;border:2px solid #bdb58c;box-shadow:2px 3px 0 #0c2119;font:700 23px/.94 'Pixelify Sans',monospace;letter-spacing:-.025em;color:#f4e5bd;text-shadow:2px 2px 0 #152b20;-webkit-text-stroke:.3px #f4e5bd}
+.caption-star{font-size:18px;line-height:1;color:#d7cf9f;align-self:center;-webkit-text-stroke:0;text-shadow:none}
+.caption-star:last-child{font-size:13px;transform:translateY(9px)}
+@media(max-height:700px){.house-caption{font-size:20px;padding:6px 14px 8px;bottom:0}.caption-star{font-size:15px}}
+
+/* Paper hugs the longest line rather than filling the delivery container. */
+.bird-delivery{width:max-content;max-width:100%}
+.carried-message{width:max-content;max-width:100%;padding:3px 6px 5px;line-height:1.04;font-size:23px}
+.carried-message>span{display:block;white-space:nowrap}
+.carried-message:before{clip-path:polygon(0 1%,99% 0,100% 99%,1% 100%);transform:rotate(-1deg)}
+.carried-message:after{width:36px;height:11px;top:-4px;right:-3px}
+@media(max-height:700px){.carried-message{font-size:21px;padding:3px 5px 4px}}
+@media(max-width:340px){.carried-message{font-size:20px}}
+
+.carried-message:before{clip-path:none;transform:none}.carried-message{padding:4px 6px 5px}.carried-message>span{text-align:center}
+
+@font-face{font-family:'Bootzy TM';src:url('bootzy-tm.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+.carried-message{font-family:'Bootzy TM',sans-serif;font-size:clamp(18px,6vw,25px);font-weight:400;font-synthesis:none;letter-spacing:0;line-height:1.05;padding:4px 6px 5px}
+@media(max-height:700px){.carried-message{font-size:clamp(18px,6vw,23px);padding:4px 6px 5px}}
+
+/* A small stitched fabric button, with a mushroom to echo the cottage. */
+.enter-link{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;gap:12px;width:min(100%,300px);min-height:56px;margin:0 auto;padding:9px 17px;background:linear-gradient(#48674a,#34513b);color:#f5e7c3;border:2px solid #bdb58e;border-radius:28px;box-shadow:0 4px 0 #152d21,inset 0 2px 0 #6e866333;font-family:'Bootzy TM',sans-serif;font-size:18px;font-weight:400;line-height:1.1;letter-spacing:0;transition:transform .18s ease,box-shadow .18s ease}
+.enter-link:before{content:'';position:absolute;inset:5px;border:1px dashed #d7cba47a;border-radius:22px;pointer-events:none;z-index:-1}
+.button-mushroom{flex:none;width:30px;height:33px;transform:rotate(-9deg)}
+.enter-label{white-space:nowrap}
+.button-arrow{width:22px;height:22px;flex:none;transition:transform .18s ease}
+.enter-link:hover .button-arrow{transform:translateX(3px)}
+.enter-link:hover{transform:translateY(-1px)}
+.enter-link:active{transform:translateY(3px);box-shadow:0 1px 0 #152d21}
+@media(prefers-reduced-motion:reduce){.enter-link,.button-arrow{transition:none}}
+
+@font-face{font-family:'Tommy';src:url('tommy-regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+.carried-message{font-family:'Tommy',serif;text-transform:none;font-size:clamp(17px,5.2vw,22px);font-weight:400;line-height:1.1;letter-spacing:0;padding:5px 7px 6px}
+@media(max-height:700px){.carried-message{font-size:clamp(17px,5.2vw,21px);padding:4px 6px 5px}}
+/* Bring the cottage closer to the university paper without changing its scale. */
+.outside-scene{top:-30px}
+@media(max-height:700px){.outside-scene{top:-20px}}
+/* Inset stitching on the university paper. */
+.carried-message{outline:1px dashed #a72a2580;outline-offset:-4px;padding:8px 10px 9px}
+@media(max-height:700px){.carried-message{padding:7px 9px 8px}}
+.direct-resume{position:relative;top:-9px;margin-top:5px}
+
+/* Direct recruiter shortcut, readable and easy to tap without entering the study. */
+.direct-resume{position:relative;top:auto;display:flex;align-items:center;justify-content:center;gap:12px;width:min(100%,300px);max-width:100%;min-height:46px;margin:10px auto 3px;padding:8px 18px;background:#eddfbc;color:#254430;border:1px solid #bdb58e;border-radius:24px;box-shadow:0 3px 0 #837e5b;font:700 17px/1.2 var(--body);text-decoration:none}
+.direct-resume svg{width:21px;height:21px;flex:none}
+.direct-resume svg:last-child{width:19px;margin-left:auto}
+.direct-resume span{margin-right:auto}
+.direct-resume:hover{background:#f7ebcf}
+.direct-resume:active{transform:translateY(2px);box-shadow:0 1px 0 #837e5b}
+/* Matching stitched companion to Enter my study, in cream and green. */
+.direct-resume{isolation:isolate;gap:12px;min-height:56px;padding:9px 17px;border:2px solid #bdb58e;border-radius:28px;background:linear-gradient(#f6eacb,#e5d6ae);color:#31523a;box-shadow:0 4px 0 #8f8967,inset 0 2px 0 #fff5db;font:400 18px/1.1 'Bootzy TM',sans-serif;transition:transform .18s ease,box-shadow .18s ease}
+.direct-resume:before{content:'';position:absolute;inset:5px;border:1px dashed #526c4280;border-radius:22px;pointer-events:none;z-index:-1}
+.direct-resume svg:first-child{width:30px;height:33px;transform:rotate(-9deg);padding:3px;background:#fff3d5;border:1px solid #9d9d75;border-radius:5px;box-shadow:1px 2px 0 #b9ad83}
+.direct-resume svg:last-child{width:22px;height:22px;margin-left:0;transition:transform .18s ease}
+.direct-resume span{margin-right:0;white-space:nowrap}
+.direct-resume:hover{background:linear-gradient(#fff2d5,#ecdfbc);transform:translateY(-1px)}
+.direct-resume:hover svg:last-child{transform:translateX(3px)}
+.direct-resume:active{transform:translateY(3px);box-shadow:0 1px 0 #8f8967}
+@media(prefers-reduced-motion:reduce){.direct-resume,.direct-resume svg:last-child{transition:none}}
