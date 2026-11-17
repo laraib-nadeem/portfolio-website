@@ -24,6 +24,10 @@ The welcome page is the current completed design. The study is the existing vers
 
 ## Hosting
 
+Public website: https://portfolio-website-nadeeml-1884.vercel.app
+
+Hosted on Vercel Hobby. Pushes to `main` automatically publish a new production deployment.
+
 Deploy the existing GitHub repository to a Vercel personal account on the free Hobby plan.
 
 The root `vercel.json` publishes `dist/` directly, with no framework, dependency installation, or build command. Import the repository with its root directory left at the repository root and use `main` as the production branch. Keep the Vercel GitHub integration connected so pushes to `main` automatically redeploy production.
