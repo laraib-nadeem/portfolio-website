@@ -11,3 +11,6 @@ body[data-view="inside"] #study-assistant{height:auto;max-height:min(580px,calc(
 .smiski-ask{display:grid;place-items:center;padding:0;line-height:1;box-sizing:border-box}
 .smiski-ask svg{display:block;pointer-events:none}
 .inside-view #study-sound{top:8px;bottom:auto}
+
+/* Give the helper mascot a little breathing room from the left edge. */
+#assistant-launch{margin-left:10px}

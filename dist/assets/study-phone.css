@@ -100,10 +100,10 @@ body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 
 .inside-view .room-directory .directory-arrow{display:block;flex:0 0 20px;width:20px;height:20px;margin-left:auto;color:currentColor;pointer-events:none}
 
-/* ASCII lawn sits behind the transparent 3D canvas: house geometry masks it. */
+/* Sparse grass doodles sit behind the transparent 3D canvas: house geometry masks it. */
 .inside-view #study-grass{position:absolute;inset:0;width:100%;height:100%!important;display:block;opacity:1;transition:none;z-index:0;pointer-events:none;user-select:none}
 .inside-view #room-canvas{z-index:1}
-.inside-view .study-ladybugs{position:absolute;inset:0;width:100%;height:100%;overflow:visible;z-index:2;pointer-events:none;user-select:none}
+.inside-view .study-ladybugs{position:absolute;inset:0;width:100%;height:100%;overflow:visible;z-index:0;pointer-events:none;user-select:none}
 .ladybug-walk{offset-distance:0%;offset-rotate:auto 90deg;animation:ladybug-crawl 88s linear infinite;pointer-events:none}
 .ladybug-2{animation-duration:103s;animation-delay:-7s}
 @keyframes ladybug-crawl{to{offset-distance:100%}}
