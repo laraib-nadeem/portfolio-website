@@ -24,7 +24,7 @@ ball(0,.22,.6,1.85,.035,1.15,'#8aa58b');const rugRing=m(new THREE.TorusGeometry(
 const chair=group(.2,.24,-.48);cube(0,.52,0,1.15,.3,1,.18,'#53715b',chair);cube(0,1.08,-.38,1.15,.98,.2,.35,'#4f715b',chair);for(const side of [-1,1]){cube(side*.56,.83,.03,.17,.36,.88,.08,'#5f8065',chair);rod([side*.4,.45,-.24],[side*.46,0,-.28],.055,'#9a7958',chair);rod([side*.4,.45,.3],[side*.46,0,.4],.055,'#9a7958',chair);}const pillow=cube(0,1.0,-.19,.65,.52,.19,.13,'#efe0b8',chair);pillow.rotation.z=.09;
 // Laraib's seated clay-style miniature: brown layered hair, bangs and black blazer.
 const avatar=group(.2,.94,-.43,'avatar');avatar.name='laraib-chibi';
-const skin='#e6b596',hair='#68452e',jacket='#303532';
+const skin='#f7dfd2',hair='#68452e',jacket='#303532';
 ball(0,.34,0,.29,.38,.21,jacket,avatar);ball(0,.68,.02,.10,.12,.10,skin,avatar);
 for(const side of [-1,1]){ball(side*.13,-.02,.20,.12,.26,.13,jacket,avatar);ball(side*.13,-.22,.29,.13,.07,.19,'#242b27',avatar);const lapel=cube(side*.105,.5,.195,.13,.29,.035,.02,'#454b42',avatar);lapel.rotation.z=side*.27;}
 const head=new THREE.Group();head.name='avatar-head';head.position.y=1.04;avatar.add(head);
@@ -34,7 +34,7 @@ for(const side of [-1,1]){
  const curl=ball(side*.41,-.40,.04,.14,.18,.18,'#795137',head);curl.rotation.z=-side*.28;
  ball(side*.415,-.04,.08,.066,.105,.055,skin,head);ball(side*.43,-.14,.13,.024,.035,.019,'#dec381',head);
  ball(side*.15,.025,.408,.033,.047,.022,'#302c27',head);ball(side*.14,.042,.426,.009,.012,.008,'#fff5db',head);
- ball(side*.245,-.12,.377,.069,.031,.012,'#d78f7a',head);
+ ball(side*.245,-.12,.377,.069,.031,.012,'#e6b6af',head);
  const brow=rod([side*.115,.135,.399],[side*.19,.14,.384],.012,hair,head);
 }
 for(const [x,y,z,angle] of [[-.23,.32,.29,-.4],[-.08,.36,.34,-.25],[.08,.36,.34,.2],[.23,.31,.29,.4]]){const bang=ball(x,y,z,.145,.235,.115,'#795137',head);bang.rotation.z=angle;}
