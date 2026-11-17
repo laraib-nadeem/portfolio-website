@@ -23,8 +23,8 @@ cube(0,1.88,-2.05,6,3.38,.17,.06,'#536f59');cube(-2.97,1.88,0,.16,3.38,4.15,.06,
 ball(0,.22,.6,1.85,.035,1.15,'#8aa58b');const rugRing=m(new THREE.TorusGeometry(1,.035,8,70),'#d0c7a2');rugRing.rotation.x=-Math.PI/2;rugRing.scale.set(1.7,1,1);rugRing.position.set(0,.25,.6);
 const chair=group(.2,.24,-.18);cube(0,.52,0,1.15,.3,1,.18,'#53715b',chair);cube(0,1.08,-.38,1.15,.98,.2,.35,'#4f715b',chair);for(const side of [-1,1]){cube(side*.56,.83,.03,.17,.36,.88,.08,'#5f8065',chair);rod([side*.4,.45,-.24],[side*.46,0,-.28],.055,'#9a7958',chair);rod([side*.4,.45,.3],[side*.46,0,.4],.055,'#9a7958',chair);}const pillow=cube(0,1.0,-.19,.65,.52,.19,.13,'#efe0b8',chair);pillow.rotation.z=.09;
 // Image-based Tomodachi character seated at her laptop, replacing the modeled avatar.
-const avatar=group(.02,1.95,.24,'avatar');avatar.name='laraib-chibi';avatar.userData.style='tomodachi-image';avatar.rotation.y=.50;
-const head=photo('assets/tomodachi-seated.webp',1.92,1.92*1024/1536,avatar);head.name='avatar-head';head.material.alphaTest=.96;head.material.depthWrite=true;
+const avatar=group(-.08,2.095,.24,'avatar');avatar.name='laraib-chibi';avatar.userData.style='tomodachi-image';avatar.rotation.y=.50;
+const head=photo('assets/tomodachi-seated.webp',2.40,2.40*1024/1536,avatar);head.name='avatar-head';head.material.alphaTest=.96;head.material.depthWrite=true;
 let waveRemaining=0;window.waveLaraib=()=>{if(!window.portfolioMotionPlaying)return;waveRemaining=1.5;};
 document.querySelector('#avatar-wave')?.addEventListener('click',()=>window.waveLaraib());
 // A real raised desk, drawer, thick worktop, textile runner and résumé paper.
@@ -51,7 +51,7 @@ const headband=m(new THREE.TorusGeometry(.215,.026,8,32,Math.PI),bunnyRed,headph
 for(const side of [-1,1])rod([side*.027,.55,.163],[-side*.027,.515,.163],.009,'#34402f',headphoneBunny);
 const scarf=meshScarf();
 function meshScarf(){const collar=cube(0,.45,.015,.33,.075,.26,.035,bunnyGreen,headphoneBunny);const end=cube(.10,.32,.14,.09,.24,.035,.015,bunnyGreen,headphoneBunny);end.rotation.z=.12;for(const y of [.26,.32])cube(0,y,.123,.26,.022,.012,.004,bunnyRed,headphoneBunny);return collar;}
-const laptopSmiski=group(1.35,1.37,.40,'projects');laptopSmiski.name='smiski-laptop';laptopSmiski.rotation.y=.15;
+const laptopSmiski=group(1.35,1.37,.40,'projects');laptopSmiski.name='smiski-laptop';laptopSmiski.scale.setScalar(.65);laptopSmiski.rotation.y=.15;
 const smiskiGreen='#b4c67e',laptopGreen='#7e9f61';
 ball(0,.26,0,.13,.20,.12,smiskiGreen,laptopSmiski);ball(0,.57,0,.225,.23,.205,smiskiGreen,laptopSmiski);
 for(const side of [-1,1]){
