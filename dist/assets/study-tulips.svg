@@ -11,6 +11,6 @@
  <g id="orange"><use href="#stem"/><use href="#cup" fill="url(#peach)"/><path d="M-6 17Q-6 29 0 35Q7 28 7 17Q0 20 0 24Q-2 20-6 17Z" fill="#ffe2b8" opacity=".55"/></g>
 </defs>
 <ellipse cx="67" cy="84" rx="49" ry="3" fill="#10291d" opacity=".2"/><ellipse cx="333" cy="84" rx="49" ry="3" fill="#10291d" opacity=".2"/>
-<use href="#yellow" transform="translate(35 17) rotate(-12) scale(.78)"/><use href="#flower" transform="translate(66 0) rotate(-4)"/><use href="#orange" transform="translate(91 16) rotate(12) scale(.8)"/>
-<use href="#flower" transform="translate(307 16) rotate(-12) scale(.8)"/><use href="#yellow" transform="translate(335 0) rotate(5)"/><use href="#orange" transform="translate(365 19) rotate(14) scale(.75)"/>
+<g transform="translate(35 17) rotate(-12) scale(.78)"><g class="tulip-sway"><use href="#yellow"/></g></g><g transform="translate(66 0) rotate(-4)"><g class="tulip-sway"><use href="#flower"/></g></g><g transform="translate(91 16) rotate(12) scale(.8)"><g class="tulip-sway"><use href="#orange"/></g></g>
+<g transform="translate(307 16) rotate(-12) scale(.8)"><g class="tulip-sway"><use href="#flower"/></g></g><g transform="translate(335 0) rotate(5)"><g class="tulip-sway"><use href="#yellow"/></g></g><g transform="translate(365 19) rotate(14) scale(.75)"><g class="tulip-sway"><use href="#orange"/></g></g>
 </svg>

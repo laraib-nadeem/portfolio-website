@@ -103,3 +103,14 @@ body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 /* Small pastel tulip clusters in the green space below the dollhouse. */
 .inside-view .study-tulips{position:absolute;left:10px;bottom:78px;width:calc(100% - 20px);height:clamp(42px,9vh,80px);object-fit:contain;pointer-events:none;user-select:none;z-index:1}
 @media(max-height:600px){.inside-view .study-tulips{height:38px}}
+
+/* Pivot each tulip at its stem so the flowers sway in a light breeze. */
+.study-tulips .tulip-sway{transform-origin:0px 78px;animation:tulip-sway 3.8s ease-in-out infinite alternate}
+.study-tulips>g:nth-of-type(2) .tulip-sway{animation-duration:4.3s;animation-delay:-1.2s}
+.study-tulips>g:nth-of-type(3) .tulip-sway{animation-duration:3.5s;animation-delay:-2.1s}
+.study-tulips>g:nth-of-type(4) .tulip-sway{animation-duration:4.1s;animation-delay:-.8s}
+.study-tulips>g:nth-of-type(5) .tulip-sway{animation-duration:3.7s;animation-delay:-1.8s}
+.study-tulips>g:nth-of-type(6) .tulip-sway{animation-duration:4.5s;animation-delay:-2.6s}
+@keyframes tulip-sway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+body.paused .study-tulips .tulip-sway,body:not([data-view="inside"]) .study-tulips .tulip-sway{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.study-tulips .tulip-sway{animation:none;transform:none}}
