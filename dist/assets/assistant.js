@@ -4,6 +4,7 @@
   launch.addEventListener('click',()=>{dialog.showModal();input.focus();});
   document.getElementById('assistant-close').addEventListener('click',()=>dialog.close());
   dialog.addEventListener('close',()=>launch.focus());
+  document.getElementById('smiski-ask-form').addEventListener('submit',event=>{event.preventDefault();const field=document.getElementById('smiski-question');const text=field.value.trim();if(!text||pending)return;dialog.showModal();field.value='';ask(text);});
   function add(text,kind){const p=document.createElement('p');p.className=kind;p.textContent=text;log.append(p);log.scrollTop=log.scrollHeight;return p;}
   function links(items){const row=document.createElement('div');row.className='assistant-links';for(const item of items){const a=document.createElement('a');a.textContent=item.label;a.href=item.href;if(item.href.startsWith('https:')){a.target='_blank';a.rel='noopener noreferrer';}a.addEventListener('click',()=>dialog.close());row.append(a);}log.append(row);log.scrollTop=log.scrollHeight;}
   async function ask(text){if(pending||!text.trim())return;pending=true;send.disabled=true;input.disabled=true;input.value='';document.getElementById('assistant-suggestions').hidden=true;add(text,'assistant-question');const waiting=add('Thinking…','assistant-reply');messages.push({role:'user',content:text});
