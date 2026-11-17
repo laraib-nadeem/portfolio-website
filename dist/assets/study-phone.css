@@ -45,3 +45,8 @@ body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 .inside-view .room-frame.github-hover .github-object,.inside-view .github-object:focus-visible{opacity:1}
 .inside-view .github-object:focus-visible{pointer-events:auto}
 @media(prefers-reduced-motion:reduce){.inside-view .github-object{transition:none}}
+
+.inside-view .linkedin-object{opacity:0;pointer-events:none;transform:translate(-50%,calc(-50% - 38px));transition:opacity .15s ease;display:flex;align-items:center;background:#f2e4c3;color:#284632;border:1px solid #ad8959;min-height:44px;padding:7px 10px;font-size:12px;z-index:4}
+.inside-view .room-frame.linkedin-hover .linkedin-object,.inside-view .linkedin-object:focus-visible{opacity:1}
+.inside-view .linkedin-object:focus-visible{pointer-events:auto}
+@media(prefers-reduced-motion:reduce){.inside-view .linkedin-object{transition:none}}
