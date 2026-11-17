@@ -93,3 +93,6 @@ body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 .is-opening-envelope #study-sound{visibility:hidden}
 
 .inside-view .room-frame .character-speech[hidden],#study-sound[hidden]{display:none!important}
+
+/* User-selected envelope and telephone artwork on the directory buttons. */
+.inside-view .room-directory .directory-art{display:block;width:32px;height:32px;flex:0 0 32px;object-fit:cover;border-radius:50%;margin:-3px 0}
