@@ -63,9 +63,35 @@ const runner=cube(.05,1.365,.15,.65,.012,1.38,.01,'#7d9c7c',desk);const paperTex
 const windowG=group(1.45,2.12,-1.9,'education');cube(0,0,0,1.55,1.88,.12,.62,'#d6bd90',windowG);cube(0,0,.09,1.35,1.68,.03,.55,'#a9c6ad',windowG);ball(.28,.33,.12,.25,.25,.018,'#f4d58a',windowG);for(const [x,y,s]of [[-.43,-.4,.4],[.24,-.5,.48],[.55,-.6,.38]])ball(x,y,.13,s,s,.025,'#709c79',windowG);rod([0,-.78,.17],[0,.78,.17],.035,'#e5cda5',windowG);rod([-.63,0,.17],[.63,0,.17],.035,'#e5cda5',windowG);cube(0,-.92,.1,1.8,.1,.4,.03,'#d3b17f',windowG);for(const side of [-1,1])for(let i=0;i<3;i++){const c=cube(side*(.67+i*.065),-.03,.22,.15,1.88,.14,.06,i%2?'#ce9176':'#dfad8c',windowG);c.rotation.z=side*.04;}rod([-.97,1.02,.22],[.97,1.02,.22],.025,'#8f7352',windowG);
 // Shelf, bright book spines, actual Sonny Angel photo without its white square.
 const shelf=group(-1.73,1.25,-1.47,'projects');cube(0,0,0,1.9,.14,.7,.05,'#b88c5c',shelf);cube(-.7,-.22,-.12,.12,.38,.35,.03,'#a4794c',shelf);cube(.7,-.22,-.12,.12,.38,.35,.03,'#a4794c',shelf);for(let i=0;i<4;i++){const book=cube(-.68+i*.19,.37,.0,.16,.6+(i%2)*.14,.4,.025,['#728d64','#e2bd69','#b35e4c','#d9d0af'][i],shelf);book.rotation.z=i===1?-.12:0;}
-// The two user-selected Pinterest trinkets, kept clear of Laraib's face.
-const headphoneBunny=group(-1.02,1.86,-1.32,'projects');headphoneBunny.name='headphones-bunny';const headphoneBunnyPrint=photo('assets/trinkets/headphones-bunny.jpg',.91,1.05,headphoneBunny,true);headphoneBunnyPrint.rotation.y=.45;
-const laptopSmiski=group(1.29,1.90,.48,'projects');laptopSmiski.name='smiski-laptop';const laptopSmiskiPrint=photo('assets/trinkets/smiski-laptop.jpg',1.02,1.02,laptopSmiski,true);laptopSmiskiPrint.rotation.y=.45;
+// Small solid miniatures share the room's materials, shadows and warm lighting.
+const headphoneBunny=group(-1.03,1.33,-1.37,'projects');headphoneBunny.name='headphones-bunny';headphoneBunny.rotation.y=.32;
+const bunnyCream='#e9ddbd',bunnyRed='#ad5e4d',bunnyGreen='#587455';
+ball(0,.29,0,.16,.22,.12,'#c2a976',headphoneBunny);ball(0,.62,0,.22,.21,.16,bunnyCream,headphoneBunny);
+for(const side of [-1,1]){
+ ball(side*.10,.89,0,.065,.22,.063,bunnyCream,headphoneBunny);
+ ball(side*.09,.065,.025,.07,.065,.09,bunnyCream,headphoneBunny);
+ ball(side*.21,.57,0,.065,.12,.09,bunnyRed,headphoneBunny);
+ ball(side*.08,.62,.15,.013,.017,.009,'#34402f',headphoneBunny);
+ const arm=ball(side*.17,.34,.02,.06,.13,.065,'#c2a976',headphoneBunny);arm.rotation.z=-side*.55;
+ ball(side*.22,.40,.04,.05,.055,.045,bunnyCream,headphoneBunny);
+}
+const headband=m(new THREE.TorusGeometry(.215,.026,8,32,Math.PI),bunnyRed,headphoneBunny);headband.position.set(0,.64,-.04);
+for(const side of [-1,1])rod([side*.027,.55,.163],[-side*.027,.515,.163],.009,'#34402f',headphoneBunny);
+const scarf=meshScarf();
+function meshScarf(){const collar=cube(0,.45,.015,.33,.075,.26,.035,bunnyGreen,headphoneBunny);const end=cube(.10,.32,.14,.09,.24,.035,.015,bunnyGreen,headphoneBunny);end.rotation.z=.12;for(const y of [.26,.32])cube(0,y,.123,.26,.022,.012,.004,bunnyRed,headphoneBunny);return collar;}
+const laptopSmiski=group(1.35,1.37,.40,'projects');laptopSmiski.name='smiski-laptop';laptopSmiski.rotation.y=.15;
+const smiskiGreen='#b4c67e',laptopGreen='#7e9f61';
+ball(0,.26,0,.13,.20,.12,smiskiGreen,laptopSmiski);ball(0,.57,0,.225,.23,.205,smiskiGreen,laptopSmiski);
+for(const side of [-1,1]){
+ const leg=ball(side*.085,.085,.13,.065,.07,.16,smiskiGreen,laptopSmiski);leg.rotation.x=-.2;
+ ball(side*.075,.585,.19,.018,.021,.011,'#466542',laptopSmiski);
+ rod([side*.12,.37,.02],[side*.16,.25,.18],.039,smiskiGreen,laptopSmiski);
+ ball(side*.15,.245,.19,.044,.035,.045,smiskiGreen,laptopSmiski);
+}
+rod([-.035,.50,.2],[.035,.50,.2],.008,'#466542',laptopSmiski);
+cube(0,.185,.23,.37,.025,.29,.018,laptopGreen,laptopSmiski);
+const laptopLid=cube(0,.335,.345,.38,.28,.024,.023,laptopGreen,laptopSmiski);laptopLid.rotation.x=-.16;
+ball(0,.335,.363,.035,.035,.006,'#ced9ae',laptopSmiski);
 // The exact Pinterest cat print, mounted above the project shelf.
 const portrait=group(-1.65,2.62,-1.82,'projects');portrait.name='projects-wall-frame';cube(0,0,0,1.18,1.3,.12,.04,'#a47a51',portrait);cube(0,0,.08,1.02,1.14,.03,.02,'#f4e4bc',portrait);const portraitPhoto=photo('assets/projects-cat.jpg',.98,.98*674/735,portrait);portraitPhoto.name='projects-cat-print';portraitPhoto.position.z=.16;
 // Framed GitHub print on the left wall, linked to Laraib's profile.
