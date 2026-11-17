@@ -81,3 +81,13 @@ body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 #next-study-tip{min-width:36px;min-height:44px;padding:3px;background:transparent;border-color:#81916a88}
 .is-opening-envelope .character-speech{visibility:hidden;pointer-events:none}
 @media(max-height:700px){.inside-view .room-frame .character-speech{width:min(235px,calc(100% - 16px));min-height:80px;padding:6px 8px 8px 10px}#study-tip{font-size:11px}}
+
+/* Small speech bubble: only her words, with controls kept off the artwork. */
+.inside-view .room-frame .character-speech{width:min(165px,calc(100% - 16px));min-height:0;padding:7px 9px 8px;gap:0;border-radius:12px;box-shadow:0 2px 0 #7c805e55}
+.character-speech .speech-heading{display:none}
+#study-tip{font-size:11px;line-height:1.3;min-height:0}
+#next-study-tip{position:absolute;inset:0;min-width:0;min-height:0;width:100%;height:100%;padding:0;border:0;border-radius:12px;background:transparent}
+#next-study-tip>span{display:none}
+#study-sound{position:absolute;right:8px;bottom:8px;z-index:5;min-width:36px;min-height:36px;border:1px solid #a9b18e;border-radius:50%;background:#243e30dd;color:#ede0bc;font-size:16px}
+.character-speech:before{width:8px;height:8px;bottom:-5px}
+.is-opening-envelope #study-sound{visibility:hidden}

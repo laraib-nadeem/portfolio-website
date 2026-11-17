@@ -3,7 +3,7 @@
  const text=document.querySelector('#study-tip'),count=document.querySelector('#study-tip-count'),next=document.querySelector('#next-study-tip'),bubble=document.querySelector('.character-speech'),sound=document.querySelector('#study-sound');
  if(!text||!count||!next||!bubble)return;
  const coarse=matchMedia('(pointer: coarse)');let index=0,timer,typing,audio,muted=false,wasInside=false;const voices=new Set();
- function messages(){const action=coarse.matches?'Tap':'Click';return [`${action} the envelope to read my full résumé.`,`${action} the GitHub frame to visit my GitHub.`,`${action} the LinkedIn frame to visit my LinkedIn.`,`${action} the cat frame behind me to see my projects.`];}
+ function messages(){const action=coarse.matches?'Tap':'Click';return [`${action} the envelope for my full résumé.`,`${action} the GitHub frame for my profile.`,`${action} the LinkedIn frame for my profile.`,`${action} the cat frame behind me for projects.`];}
  function active(){return document.body.dataset.view==='inside'&&!document.hidden&&!document.querySelector('#document-dialog')?.open;}
  function stopVoice(){for(const voice of voices){try{voice.stop();}catch{}}voices.clear();}
  function unlock(){if(muted)return;const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return;try{audio||=new Audio();if(audio.state==='suspended')audio.resume().catch(()=>{});}catch{}}
