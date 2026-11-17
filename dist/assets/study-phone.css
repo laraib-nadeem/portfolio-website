@@ -70,3 +70,14 @@ body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 #next-study-tip{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:44px;min-height:44px;padding:3px;border:1px dashed #81916a;border-radius:12px;color:#31523a;background:#e3d9b6}
 #study-tip-count{font:600 10px/1 var(--body)}#next-study-tip>span:last-child{font-size:19px;line-height:1}
 @media(max-height:700px){.inside-view .character-speech{padding:7px 8px 7px 11px}.speech-name{font-size:12px}#study-tip{font-size:12px}}
+/* Speech belongs to her head, inside the scene. */
+.inside-view{grid-template-rows:auto minmax(0,1fr) auto auto}
+.inside-view .room-directory{grid-row:3}.inside-view .trinket-credits{grid-row:4}
+.inside-view .room-frame .character-speech{position:absolute;left:20px;top:10px;z-index:6;display:flex;width:min(245px,calc(100% - 16px));max-width:none;min-height:86px;margin:0;padding:8px 9px 10px 12px;gap:6px;border-radius:16px;background:#f1e5c6;box-shadow:0 3px 0 #7c805e80}
+.character-speech:before{top:auto;bottom:-7px;left:var(--speech-tail,65%);border:0;border-right:1px solid #b9ad84;border-bottom:1px solid #b9ad84}
+.speech-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:3px}.speech-heading .speech-name{margin:0;font-size:12px}
+#study-sound{min-width:32px;min-height:28px;padding:2px 4px;border-radius:8px;border:1px solid #b9ad8480;color:#526746;font-size:16px;line-height:1;background:#e7ddbd}
+#study-tip{font-size:12px;line-height:1.35;min-height:3.9em}
+#next-study-tip{min-width:36px;min-height:44px;padding:3px;background:transparent;border-color:#81916a88}
+.is-opening-envelope .character-speech{visibility:hidden;pointer-events:none}
+@media(max-height:700px){.inside-view .room-frame .character-speech{width:min(235px,calc(100% - 16px));min-height:80px;padding:6px 8px 8px 10px}#study-tip{font-size:11px}}
