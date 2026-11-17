@@ -28,7 +28,7 @@ const skin='#f7dfd2',hair='#68452e',jacket='#303532';
 ball(0,.34,0,.29,.38,.21,jacket,avatar);ball(0,.68,.02,.10,.12,.10,skin,avatar);
 for(const side of [-1,1]){ball(side*.13,-.02,.20,.12,.26,.13,jacket,avatar);ball(side*.13,-.22,.29,.13,.07,.19,'#242b27',avatar);const lapel=cube(side*.105,.5,.195,.13,.29,.035,.02,'#454b42',avatar);lapel.rotation.z=side*.27;}
 const head=new THREE.Group();head.name='avatar-head';head.position.y=1.04;avatar.add(head);
-ball(0,.03,-.06,.49,.53,.39,hair,head);ball(0,0,.085,.415,.445,.345,skin,head);
+ball(0,.03,-.06,.49,.53,.39,hair,head);ball(0,-.012,.085,.43,.43,.35,skin,head);
 for(const side of [-1,1]){
  ball(side*.38,-.12,.0,.14,.40,.24,hair,head);
  const curl=ball(side*.41,-.40,.04,.14,.18,.18,'#795137',head);curl.rotation.z=-side*.28;
@@ -38,8 +38,19 @@ for(const side of [-1,1]){
  const brow=rod([side*.115,.135,.399],[side*.19,.14,.384],.012,hair,head);
 }
 for(const [x,y,z,angle] of [[-.23,.32,.29,-.4],[-.08,.36,.34,-.25],[.08,.36,.34,.2],[.23,.31,.29,.4]]){const bang=ball(x,y,z,.145,.235,.115,'#795137',head);bang.rotation.z=angle;}
-ball(0,-.075,.438,.032,.032,.025,skin,head);
-const smileCurve=new THREE.QuadraticBezierCurve3(new THREE.Vector3(-.065,-.17,.408),new THREE.Vector3(0,-.23,.434),new THREE.Vector3(.065,-.17,.408));m(new THREE.TubeGeometry(smileCurve,16,.012,6,false),'#8f4a3f',head);
+ball(0,-.075,.438,.022,.022,.015,skin,head);
+// Round wire glasses and a tiny double-curve :3 mouth.
+for(const side of [-1,1]){
+ const rim=m(new THREE.TorusGeometry(.102,.013,8,40),'#574b3d',head);rim.name='avatar-glasses';rim.position.set(side*.15,.025,.445);
+ rod([side*.245,.045,.425],[side*.37,.045,.27],.012,'#574b3d',head);
+ ball(side*.246,-.13,.38,.075,.032,.014,'#e9b9b5',head);
+}
+rod([-.047,.04,.45],[.047,.04,.45],.012,'#574b3d',head);
+for(const side of [-1,1]){
+ const curve=new THREE.QuadraticBezierCurve3(new THREE.Vector3(side*.082,-.17,.426),new THREE.Vector3(side*.05,-.255,.44),new THREE.Vector3(0,-.18,.442));
+ const mouth=m(new THREE.TubeGeometry(curve,20,.013,8,false),'#895044',head);mouth.name='avatar-three-mouth';
+}
+
 const necklace=m(new THREE.TorusGeometry(.10,.009,6,28,Math.PI),'#d5b365',avatar);necklace.position.set(0,.57,.21);necklace.rotation.z=Math.PI;ball(0,.47,.22,.025,.027,.012,'#d5b365',avatar);
 const waveArm=new THREE.Group();waveArm.position.set(.29,.55,.0);avatar.add(waveArm);waveArm.rotation.z=-.3;ball(.09,.10,0,.10,.22,.11,jacket,waveArm);ball(.13,.32,.01,.083,.09,.075,skin,waveArm);
 ball(-.34,.39,.06,.10,.23,.11,jacket,avatar);ball(-.36,.20,.12,.075,.085,.07,skin,avatar);
