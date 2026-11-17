@@ -62,3 +62,11 @@ body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 @media(prefers-reduced-motion:reduce){.inside-view .room-frame .projects-frame-label{transition:none}}
 /* Restore only the three frame tooltips; other room labels stay hidden. */
 .inside-view .room-frame .github-object,.inside-view .room-frame .linkedin-object{display:flex}
+/* Her tips sit outside the 3D view, so the room stays unobstructed. */
+.inside-view .character-speech{position:relative;display:flex;align-items:center;gap:8px;max-width:none;width:100%;margin:3px 0 0;padding:9px 10px 9px 13px;background:#f1e5c6;color:#294631;border:1px solid #b9ad84;border-radius:16px;box-shadow:0 2px 0 #7c805e;text-align:left}
+.character-speech:before{content:'';position:absolute;top:-7px;left:65%;width:11px;height:11px;background:#f1e5c6;border-top:1px solid #b9ad84;border-left:1px solid #b9ad84;transform:rotate(45deg)}
+.speech-copy{flex:1;min-width:0}.speech-name{display:block;font:700 13px/1 'Pixelify Sans',monospace;color:#63734f;margin-bottom:4px}
+#study-tip{font:500 13px/1.35 var(--body);margin:0;text-wrap:pretty}
+#next-study-tip{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:44px;min-height:44px;padding:3px;border:1px dashed #81916a;border-radius:12px;color:#31523a;background:#e3d9b6}
+#study-tip-count{font:600 10px/1 var(--body)}#next-study-tip>span:last-child{font-size:19px;line-height:1}
+@media(max-height:700px){.inside-view .character-speech{padding:7px 8px 7px 11px}.speech-name{font-size:12px}#study-tip{font-size:12px}}
