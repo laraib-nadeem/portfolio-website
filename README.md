@@ -47,3 +47,9 @@ The study has a headphone Smiski with a compact question bar beneath the room an
 Run `npm ci` and `npm test` for the API validation checks. Vercel installs dependencies and serves `dist` alongside `/api/chat`. Save `GOOGLE_GENERATIVE_AI_API_KEY` as a sensitive Production environment variable in Vercel (Preview only if desired). Keep the Google project on its free tier with billing disabled to avoid inference charges. Free access and quotas depend on Google’s current eligibility and limits. No Vercel AI Gateway credits or payment verification are needed. When Google rejects a request or its quota is exhausted, the panel shows an honest error and direct résumé/project links.
 
 Requests are bounded to 10 messages, 1,200 characters per message, 700 output tokens, and a 23-second inference timeout. The in-memory 12-request/minute burst limit is per function instance, not a globally durable spending cap. Keep paid billing disabled in Google AI Studio to stay within free quotas. No browsing, write actions, or personal-data collection tools are attached.
+
+### Local placement mode
+
+Open `/?edit=1#inside` to drag page elements and 3D room objects. Choose an item in the panel, or click an object, then drag; arrow keys nudge and Shift increases the step. Selecting an item in the menu locks that selection until another menu selection or reload, which allows moving the whole panel or navigation group. Uncheck “Dragging enabled” to try normal interactions. Collapse the panel to get it out of the way.
+
+Changes save in this browser's local storage under `laraib-placement-v1`, separately for phone (<768px) and desktop. They apply only while `edit=1` is present. Use a responsive viewport for phone previews. Export/import JSON to move placements between browsers or submit them for publication. The editor has no server write or publishing capability, and normal visitors receive the published layout. Undo/reset are local only.
