@@ -38,4 +38,4 @@ Third-party libraries, fonts, and images retain their respective licenses. Tommy
 
 ## Character model
 
-`dist/assets/models/laraib-tomodachi.glb` is the custom 3D character built from Laraib’s supplied front and side references. The study uses the same procedural meshes in `room-world.js`, including the interactive wave.
+`dist/assets/models/laraib-tomodachi.glb` is the custom 3D character built from Laraib’s supplied front and side references. This earlier custom model is retained as an optional asset. The study currently displays an image-based Tomodachi character with her laptop instead.
