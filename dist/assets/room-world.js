@@ -112,9 +112,10 @@ const mug=group(1.52,1.4,1.04,'contact');const cup=m(new THREE.CylinderGeometry(
 function denimTexture(){const c=document.createElement('canvas');c.width=c.height=256;const ctx=c.getContext('2d');ctx.fillStyle='#264563';ctx.fillRect(0,0,256,256);ctx.lineWidth=1;for(let i=-256;i<512;i+=4){ctx.strokeStyle=i%8===0?'#6e879a':'#152f4d';ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i-180,256);ctx.stroke();}for(let y=0;y<256;y+=7){ctx.strokeStyle='#92a3ac25';ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(256,y+8);ctx.stroke();}const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t;}
 const denim=material('#ffffff',{map:denimTexture(),roughness:1}),denimDark=material('#b9c7d5',{map:denimTexture(),roughness:1});
 const envelope=group(.35,1.405,.95,'resume');envelope.name='resume-envelope';envelope.rotation.x=-Math.PI/2;envelope.rotation.z=-.1;
-const envelopeBack=cube(0,0,0,1.37,.92,.025,.04,denim,envelope);
+// Actual pocket depth: backing behind paper, sewn front folds in front.
+const envelopeBack=m(new THREE.BoxGeometry(1.37,.92,.02),denim,envelope);envelopeBack.name='envelope-pocket-back';envelopeBack.position.z=-.04;
 function fabricTriangle(points,parent,color){const shape=new THREE.Shape();shape.moveTo(points[0][0],points[0][1]);for(const p of points.slice(1))shape.lineTo(p[0],p[1]);shape.closePath();return m(new THREE.ShapeGeometry(shape),color,parent);}
-const insert=m(new THREE.PlaneGeometry(1.15,1.2),new THREE.MeshBasicMaterial({map:paperTex,side:THREE.DoubleSide}),envelope);insert.name='resume-insert';insert.position.set(0,-.03,.023);insert.scale.y=.61;
+const insert=m(new THREE.PlaneGeometry(1.15,1.2),new THREE.MeshBasicMaterial({map:paperTex,side:THREE.DoubleSide}),envelope);insert.name='resume-insert';insert.position.set(0,-.03,0);insert.scale.y=.61;
 const leftFold=fabricTriangle([[-.68,-.46],[-.68,.46],[.2,-.12]],envelope,denimDark);leftFold.position.z=.045;
 const rightFold=fabricTriangle([[.68,-.46],[.68,.46],[-.2,-.12]],envelope,denimDark);rightFold.position.z=.047;
 const lowerFold=fabricTriangle([[-.68,-.46],[.68,-.46],[0,.12]],envelope,denim);lowerFold.position.z=.055;
@@ -128,7 +129,7 @@ window.openDeskEnvelope=()=>new Promise(resolve=>{
  host.classList.add('is-opening-envelope');envelopeResolve=resolve;
  const facing=Math.atan2(camera.position.x-envelope.position.x,camera.position.z-envelope.position.z)-room.rotation.y;
  envelopeCamera={left:camera.left,right:camera.right,top:camera.top,bottom:camera.bottom,zoom:camera.zoom};
- if(!window.gsap||!window.portfolioMotionPlaying){envelope.position.set(.35,1.95,1.2);envelope.rotation.set(0,facing,0);flapHinge.rotation.x=-2.65;insert.position.set(0,.92,.075);insert.scale.y=1;render();envelopeResolve=null;resolve();return;}
+ if(!window.gsap||!window.portfolioMotionPlaying){envelope.position.set(.35,1.95,1.2);envelope.rotation.set(0,facing,0);flapHinge.rotation.x=2.65;insert.position.set(0,.92,0);insert.scale.y=1;render();envelopeResolve=null;resolve();return;}
  const halfW=(camera.right-camera.left)/2,halfH=(camera.top-camera.bottom)/2;
  // Aim the close-up at the final upright pose, with room above for the rising sheet.
  const uprightCenter=new THREE.Vector3(.35,2.40,1.2).applyMatrix4(room.matrixWorld).applyMatrix4(camera.matrixWorldInverse);
@@ -137,12 +138,12 @@ window.openDeskEnvelope=()=>new Promise(resolve=>{
  .to(envelope.position,{y:1.95,z:1.2,duration:.65,ease:'power2.inOut'},0)
  .to(envelope.rotation,{x:0,y:facing,z:0,duration:.65,ease:'power2.inOut'},0)
  .to(camera,{left:uprightCenter.x-halfW,right:uprightCenter.x+halfW,top:uprightCenter.y+halfH,bottom:uprightCenter.y-halfH,zoom,duration:.7,ease:'power2.inOut'},.05)
- .to(flapHinge.rotation,{x:-2.65,duration:.5,ease:'power2.inOut'},.72)
- .to(insert.position,{y:.92,z:.075,duration:.85,ease:'power3.out'},1.23)
+ .to(flapHinge.rotation,{x:2.65,duration:.5,ease:'power2.inOut'},.72)
+ .to(insert.position,{y:.92,z:0,duration:.85,ease:'power3.out'},1.23)
  .to(insert.scale,{y:1,duration:.7,ease:'power2.out'},1.23)
  .to(insert.position,{y:1.04,duration:.25,ease:'sine.out'},2.08);
 });
-window.resetDeskEnvelope=()=>{host.classList.remove('is-opening-envelope');envelopeTween?.kill();envelopeResolve?.();envelopeResolve=null;if(envelopeCamera){Object.assign(camera,envelopeCamera);envelopeCamera=null;}envelope.position.set(.35,1.405,.95);envelope.rotation.set(-Math.PI/2,0,-.1);flapHinge.rotation.x=0;insert.position.set(0,-.03,.023);insert.scale.y=.61;render();};
+window.resetDeskEnvelope=()=>{host.classList.remove('is-opening-envelope');envelopeTween?.kill();envelopeResolve?.();envelopeResolve=null;if(envelopeCamera){Object.assign(camera,envelopeCamera);envelopeCamera=null;}envelope.position.set(.35,1.405,.95);envelope.rotation.set(-Math.PI/2,0,-.1);flapHinge.rotation.x=0;insert.position.set(0,-.03,0);insert.scale.y=.61;render();};
 const cat=group(-2.1,.3,1.0,'resume');ball(0,.15,0,.34,.17,.22,'#ead5b1',cat);ball(.18,.28,.07,.18,.17,.17,'#efdfc1',cat);for(const side of [-1,1]){const ear=m(new THREE.ConeGeometry(.06,.14,3),'#c59c74',cat);ear.position.set(.18+side*.1,.44,.06);ball(.18+side*.055,.3,.23,.012,.009,.01,'#4d5137',cat);}const tail=m(new THREE.TorusGeometry(.13,.04,8,20,Math.PI*1.6),'#b08a64',cat);tail.rotation.x=Math.PI/2;tail.position.set(-.2,.15,-.06);
 // A mushroom task lamp is a real light switch, not an unrelated decoration.
 const mushroom=group(-1.3,1.4,-.05,'lamp');rod([0,0,0],[0,.33,0],.05,'#d8cba7',mushroom);ball(0,.35,0,.24,.12,.22,'#c2825d',mushroom);for(const[x,z]of [[-.1,.06],[.08,.08],[.04,-.08]])ball(x,.43,z,.035,.015,.035,'#f3e4c2',mushroom);const lampLight=new THREE.PointLight(0xffcf83,0,4);lampLight.position.set(-1.1,1.85,.5);room.add(lampLight);
