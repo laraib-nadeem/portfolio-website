@@ -21,14 +21,15 @@ cube(0,-.02,0,6.1,.28,4.35,.12,'#986e4e');cube(0,.12,0,5.9,.12,4.16,.08,'#c39b73
 cube(0,1.88,-2.05,6,3.38,.17,.06,'#536f59');cube(-2.97,1.88,0,.16,3.38,4.15,.06,'#e4d8b9');for(const y of [.32,3.47]){cube(0,y,-1.91,6,.12,.15,.03,'#a27b54');cube(-2.86,y,0,.14,.12,4.1,.03,'#a27b54');}
 // Round woven rug and a richly coloured upholstered chair.
 ball(0,.22,.6,1.85,.035,1.15,'#8aa58b');const rugRing=m(new THREE.TorusGeometry(1,.035,8,70),'#d0c7a2');rugRing.rotation.x=-Math.PI/2;rugRing.scale.set(1.7,1,1);rugRing.position.set(0,.25,.6);
-const chair=group(.2,.24,-.48);cube(0,.52,0,1.15,.3,1,.18,'#53715b',chair);cube(0,1.08,-.38,1.15,.98,.2,.35,'#4f715b',chair);for(const side of [-1,1]){cube(side*.56,.83,.03,.17,.36,.88,.08,'#5f8065',chair);rod([side*.4,.45,-.24],[side*.46,0,-.28],.055,'#9a7958',chair);rod([side*.4,.45,.3],[side*.46,0,.4],.055,'#9a7958',chair);}const pillow=cube(0,1.0,-.19,.65,.52,.19,.13,'#efe0b8',chair);pillow.rotation.z=.09;
+const chair=group(.2,.24,-.18);cube(0,.52,0,1.15,.3,1,.18,'#53715b',chair);cube(0,1.08,-.38,1.15,.98,.2,.35,'#4f715b',chair);for(const side of [-1,1]){cube(side*.56,.83,.03,.17,.36,.88,.08,'#5f8065',chair);rod([side*.4,.45,-.24],[side*.46,0,-.28],.055,'#9a7958',chair);rod([side*.4,.45,.3],[side*.46,0,.4],.055,'#9a7958',chair);}const pillow=cube(0,1.0,-.19,.65,.52,.19,.13,'#efe0b8',chair);pillow.rotation.z=.09;
 // Image-based Tomodachi character seated at her laptop, replacing the modeled avatar.
-const avatar=group(.2,1.94,-.26,'avatar');avatar.name='laraib-chibi';avatar.userData.style='tomodachi-image';avatar.rotation.y=.50;
+const avatar=group(.05,1.85,.24,'avatar');avatar.name='laraib-chibi';avatar.userData.style='tomodachi-image';avatar.rotation.y=.50;
 const head=photo('assets/tomodachi-seated.webp',1.60,1.60*1024/1536,avatar);head.name='avatar-head';head.material.alphaTest=.96;head.material.depthWrite=true;
 let waveRemaining=0;window.waveLaraib=()=>{if(!window.portfolioMotionPlaying)return;waveRemaining=1.5;};
 document.querySelector('#avatar-wave')?.addEventListener('click',()=>window.waveLaraib());
 // A real raised desk, drawer, thick worktop, textile runner and résumé paper.
 const desk=group(.2,0,.78,'resume');cube(0,1.25,0,3.5,.2,1.45,.3,'#ddbc8c',desk);for(const x of [-1.35,1.35])for(const z of [-.45,.45])rod([x,1.15,z],[x*1.04,.2,z*1.07],.085,'#ad8358',desk);cube(0,1.02,.2,2.6,.3,.7,.05,'#bf966a',desk);cube(0,1.0,.58,.9,.21,.07,.03,'#d1a877',desk);rod([-.12,1,.65],[.12,1,.65],.025,'#967443',desk);
+const laptopContact=m(new THREE.CircleGeometry(.44,40),new THREE.MeshBasicMaterial({color:'#514931',transparent:true,opacity:.14,depthWrite:false}),desk);laptopContact.name='laptop-contact-shadow';laptopContact.rotation.x=-Math.PI/2;laptopContact.scale.y=.6;laptopContact.position.set(-.35,1.377,-.30);laptopContact.castShadow=false;
 const runner=cube(.05,1.365,.15,.65,.012,1.38,.01,'#7d9c7c',desk);const paperTex=textTexture(['Laraib Nadeem','Resume']);
 // Window: dimensional frame, distant green trees, coral fabric curtains.
 const windowG=group(1.45,2.12,-1.9,'education');cube(0,0,0,1.55,1.88,.12,.62,'#d6bd90',windowG);cube(0,0,.09,1.35,1.68,.03,.55,'#a9c6ad',windowG);ball(.28,.33,.12,.25,.25,.018,'#f4d58a',windowG);for(const [x,y,s]of [[-.43,-.4,.4],[.24,-.5,.48],[.55,-.6,.38]])ball(x,y,.13,s,s,.025,'#709c79',windowG);rod([0,-.78,.17],[0,.78,.17],.035,'#e5cda5',windowG);rod([-.63,0,.17],[.63,0,.17],.035,'#e5cda5',windowG);cube(0,-.92,.1,1.8,.1,.4,.03,'#d3b17f',windowG);for(const side of [-1,1])for(let i=0;i<3;i++){const c=cube(side*(.67+i*.065),-.03,.22,.15,1.88,.14,.06,i%2?'#ce9176':'#dfad8c',windowG);c.rotation.z=side*.04;}rod([-.97,1.02,.22],[.97,1.02,.22],.025,'#8f7352',windowG);
@@ -82,7 +83,8 @@ const mug=group(1.52,1.4,1.04,'contact');const cup=m(new THREE.CylinderGeometry(
 // Denim résumé envelope, stitched edges, hinged triangular flap and rising document.
 function denimTexture(){const c=document.createElement('canvas');c.width=c.height=256;const ctx=c.getContext('2d');ctx.fillStyle='#264563';ctx.fillRect(0,0,256,256);ctx.lineWidth=1;for(let i=-256;i<512;i+=4){ctx.strokeStyle=i%8===0?'#6e879a':'#152f4d';ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i-180,256);ctx.stroke();}for(let y=0;y<256;y+=7){ctx.strokeStyle='#92a3ac25';ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(256,y+8);ctx.stroke();}const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t;}
 const denim=material('#ffffff',{map:denimTexture(),roughness:1}),denimDark=material('#b9c7d5',{map:denimTexture(),roughness:1});
-const envelope=group(.35,1.405,.95,'resume');envelope.name='resume-envelope';envelope.rotation.x=-Math.PI/2;envelope.rotation.z=-.1;
+const envelopeHome=new THREE.Vector3(-.91,1.405,1.02);
+const envelope=group(envelopeHome.x,envelopeHome.y,envelopeHome.z,'resume');envelope.scale.setScalar(.80);envelope.name='resume-envelope';envelope.rotation.x=-Math.PI/2;envelope.rotation.z=-.1;
 // Actual pocket depth: backing behind paper, sewn front folds in front.
 const envelopeBack=m(new THREE.BoxGeometry(1.37,.92,.02),denim,envelope);envelopeBack.name='envelope-pocket-back';envelopeBack.position.z=-.04;
 function fabricTriangle(points,parent,color){const shape=new THREE.Shape();shape.moveTo(points[0][0],points[0][1]);for(const p of points.slice(1))shape.lineTo(p[0],p[1]);shape.closePath();return m(new THREE.ShapeGeometry(shape),color,parent);}
@@ -100,13 +102,14 @@ window.openDeskEnvelope=()=>new Promise(resolve=>{
  host.classList.add('is-opening-envelope');envelopeResolve=resolve;
  const facing=Math.atan2(camera.position.x-envelope.position.x,camera.position.z-envelope.position.z)-room.rotation.y;
  envelopeCamera={left:camera.left,right:camera.right,top:camera.top,bottom:camera.bottom,zoom:camera.zoom};
- if(!window.gsap||!window.portfolioMotionPlaying){envelope.position.set(.35,1.95,1.2);envelope.rotation.set(0,facing,0);flapHinge.rotation.x=2.65;flapHinge.position.z=-.065;insert.position.set(0,.92,0);insert.scale.y=1;render();envelopeResolve=null;resolve();return;}
+ if(!window.gsap||!window.portfolioMotionPlaying){envelope.position.set(.35,1.95,1.2);envelope.scale.setScalar(1);envelope.rotation.set(0,facing,0);flapHinge.rotation.x=2.65;flapHinge.position.z=-.065;insert.position.set(0,.92,0);insert.scale.y=1;render();envelopeResolve=null;resolve();return;}
  const halfW=(camera.right-camera.left)/2,halfH=(camera.top-camera.bottom)/2;
  // Aim the close-up at the final upright pose, with room above for the rising sheet.
  const uprightCenter=new THREE.Vector3(.35,2.40,1.2).applyMatrix4(room.matrixWorld).applyMatrix4(camera.matrixWorldInverse);
  const zoom=Math.min(halfW*2/2.15,halfH*2/2.6);
  envelopeTween=window.gsap.timeline({onUpdate:render,onComplete:()=>{envelopeResolve=null;resolve();}})
- .to(envelope.position,{y:1.95,z:1.2,duration:.65,ease:'power2.inOut'},0)
+ .to(envelope.position,{x:.35,y:1.95,z:1.2,duration:.65,ease:'power2.inOut'},0)
+ .to(envelope.scale,{x:1,y:1,z:1,duration:.65,ease:'power2.inOut'},0)
  .to(envelope.rotation,{x:0,y:facing,z:0,duration:.65,ease:'power2.inOut'},0)
  .to(camera,{left:uprightCenter.x-halfW,right:uprightCenter.x+halfW,top:uprightCenter.y+halfH,bottom:uprightCenter.y-halfH,zoom,duration:.7,ease:'power2.inOut'},.05)
  .to(flapHinge.rotation,{x:2.65,duration:.5,ease:'power2.inOut'},.72)
@@ -114,14 +117,14 @@ window.openDeskEnvelope=()=>new Promise(resolve=>{
  .to(insert.position,{y:.45,z:0,duration:.8,ease:'power2.out'},1.23)
  .to(insert.position,{y:1.20,duration:.5,ease:'power2.inOut'},2.60);
 });
-window.resetDeskEnvelope=()=>{host.classList.remove('is-opening-envelope');envelopeTween?.kill();envelopeResolve?.();envelopeResolve=null;if(envelopeCamera){Object.assign(camera,envelopeCamera);envelopeCamera=null;}envelope.position.set(.35,1.405,.95);envelope.rotation.set(-Math.PI/2,0,-.1);flapHinge.rotation.x=0;flapHinge.position.z=.062;insert.position.set(0,-.18,0);insert.scale.y=1;render();};
+window.resetDeskEnvelope=()=>{host.classList.remove('is-opening-envelope');envelopeTween?.kill();envelopeResolve?.();envelopeResolve=null;if(envelopeCamera){Object.assign(camera,envelopeCamera);envelopeCamera=null;}envelope.position.copy(envelopeHome);envelope.scale.setScalar(.80);envelope.rotation.set(-Math.PI/2,0,-.1);flapHinge.rotation.x=0;flapHinge.position.z=.062;insert.position.set(0,-.18,0);insert.scale.y=1;render();};
 const cat=group(-2.1,.3,1.0,'resume');ball(0,.15,0,.34,.17,.22,'#ead5b1',cat);ball(.18,.28,.07,.18,.17,.17,'#efdfc1',cat);for(const side of [-1,1]){const ear=m(new THREE.ConeGeometry(.06,.14,3),'#c59c74',cat);ear.position.set(.18+side*.1,.44,.06);ball(.18+side*.055,.3,.23,.012,.009,.01,'#4d5137',cat);}const tail=m(new THREE.TorusGeometry(.13,.04,8,20,Math.PI*1.6),'#b08a64',cat);tail.rotation.x=Math.PI/2;tail.position.set(-.2,.15,-.06);
 // A mushroom task lamp is a real light switch, not an unrelated decoration.
 const mushroom=group(-1.3,1.4,-.05,'lamp');rod([0,0,0],[0,.33,0],.05,'#d8cba7',mushroom);ball(0,.35,0,.24,.12,.22,'#c2825d',mushroom);for(const[x,z]of [[-.1,.06],[.08,.08],[.04,-.08]])ball(x,.43,z,.035,.015,.035,'#f3e4c2',mushroom);const lampLight=new THREE.PointLight(0xffcf83,0,4);lampLight.position.set(-1.1,1.85,.5);room.add(lampLight);
 // Small plant, star charm and books on the floor fill depth without blocking documents.
 const plant=group(-2.5,.25,-.3,'education');const pot=m(new THREE.CylinderGeometry(.2,.14,.3,18),'#ba785a',plant);pot.position.y=.15;for(let i=0;i<5;i++){const a=i*1.2;rod([0,.3,0],[Math.cos(a)*.18,.7+i*.04,Math.sin(a)*.13],.012,'#5f7d50',plant);const leaf=ball(Math.cos(a)*.2,.65+i*.04,Math.sin(a)*.16,.1,.2,.05,'#86a86e',plant);leaf.rotation.z=Math.cos(a)*.65;}
 const notes=group(2.05,.35,1.2,'resume');for(let i=0;i<3;i++){const b=cube(0,i*.11,0,.65,.09,.48,.025,['#d9c68b','#8ca379','#b76d57'][i],notes);b.rotation.y=i*.13;}
-const markers={projectFrame:new THREE.Vector3(-1.65,2.62,-1.60),github:new THREE.Vector3(-2.70,2.35,-.65),linkedin:new THREE.Vector3(-2.70,2.35,.9),resume:new THREE.Vector3(.3,1.4,1.05),projects:new THREE.Vector3(-1.75,1.45,-.9),education:new THREE.Vector3(1.45,2.1,-1.7),contact:new THREE.Vector3(1.55,1.45,1.05)};
+const markers={projectFrame:new THREE.Vector3(-1.65,2.62,-1.60),github:new THREE.Vector3(-2.70,2.35,-.65),linkedin:new THREE.Vector3(-2.70,2.35,.9),resume:new THREE.Vector3(-.91,1.4,1.02),projects:new THREE.Vector3(-1.75,1.45,-.9),education:new THREE.Vector3(1.45,2.1,-1.7),contact:new THREE.Vector3(1.55,1.45,1.05)};
 let visible=false,frame,last=0,target=0,drag=null,dragged=false;const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();
 function markerPositions(){const rect=host.getBoundingClientRect();const r={width:host.clientWidth||rect.width,height:host.clientHeight||rect.height};if(!r.width)return;const placed=[];for(const[name,point]of Object.entries(markers)){const el=host.querySelector('[data-target="'+name+'"]');if(!el)continue;const p=point.clone().applyMatrix4(room.matrixWorld).project(camera),width=el.offsetWidth||90;let x=Math.min(r.width-width/2-8,Math.max(width/2+8,(p.x+1)*r.width/2)),y=(-p.y+1)*r.height/2;for(const prev of placed)if(Math.abs(x-prev.x)<(width+prev.width)/2+7&&Math.abs(y-prev.y)<48)y=prev.y+51;y=Math.max(42,Math.min(r.height-65,y));placed.push({x,y,width});el.style.left=x+'px';el.style.top=y+'px';}}
 function updateResumePaper(){
