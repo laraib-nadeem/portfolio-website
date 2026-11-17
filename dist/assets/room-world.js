@@ -23,7 +23,7 @@ cube(0,1.88,-2.05,6,3.38,.17,.06,'#536f59');cube(-2.97,1.88,0,.16,3.38,4.15,.06,
 ball(0,.22,.6,1.85,.035,1.15,'#8aa58b');const rugRing=m(new THREE.TorusGeometry(1,.035,8,70),'#d0c7a2');rugRing.rotation.x=-Math.PI/2;rugRing.scale.set(1.7,1,1);rugRing.position.set(0,.25,.6);
 const chair=group(.36,.24,-.18);cube(0,.52,0,1.15,.3,1,.18,'#53715b',chair);cube(0,1.08,-.38,1.15,.98,.2,.35,'#4f715b',chair);for(const side of [-1,1]){cube(side*.56,.83,.03,.17,.36,.88,.08,'#5f8065',chair);rod([side*.4,.45,-.24],[side*.46,0,-.28],.055,'#9a7958',chair);rod([side*.4,.45,.3],[side*.46,0,.4],.055,'#9a7958',chair);}const pillow=cube(0,1.0,-.19,.65,.52,.19,.13,'#efe0b8',chair);pillow.rotation.z=.09;
 // Image-based Tomodachi character seated at her laptop, replacing the modeled avatar.
-const avatar=group(.34,2.095,.24,'avatar');avatar.name='laraib-chibi';avatar.userData.style='tomodachi-image';avatar.rotation.y=.50;
+const avatar=group(.34,2.015,.24,'avatar');avatar.name='laraib-chibi';avatar.userData.style='tomodachi-image';avatar.rotation.y=.58;avatar.rotation.z=-.055;
 const head=photo('assets/tomodachi-seated.webp',2.40,2.40*1024/1536,avatar);head.name='avatar-head';head.material.alphaTest=.96;head.material.depthWrite=true;
 let waveRemaining=0;window.waveLaraib=()=>{if(!window.portfolioMotionPlaying)return;waveRemaining=1.5;};
 document.querySelector('#avatar-wave')?.addEventListener('click',()=>window.waveLaraib());
