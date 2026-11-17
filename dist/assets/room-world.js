@@ -22,38 +22,40 @@ cube(0,1.88,-2.05,6,3.38,.17,.06,'#536f59');cube(-2.97,1.88,0,.16,3.38,4.15,.06,
 // Round woven rug and a richly coloured upholstered chair.
 ball(0,.22,.6,1.85,.035,1.15,'#8aa58b');const rugRing=m(new THREE.TorusGeometry(1,.035,8,70),'#d0c7a2');rugRing.rotation.x=-Math.PI/2;rugRing.scale.set(1.7,1,1);rugRing.position.set(0,.25,.6);
 const chair=group(.2,.24,-.48);cube(0,.52,0,1.15,.3,1,.18,'#53715b',chair);cube(0,1.08,-.38,1.15,.98,.2,.35,'#4f715b',chair);for(const side of [-1,1]){cube(side*.56,.83,.03,.17,.36,.88,.08,'#5f8065',chair);rod([side*.4,.45,-.24],[side*.46,0,-.28],.055,'#9a7958',chair);rod([side*.4,.45,.3],[side*.46,0,.4],.055,'#9a7958',chair);}const pillow=cube(0,1.0,-.19,.65,.52,.19,.13,'#efe0b8',chair);pillow.rotation.z=.09;
-// Laraib's seated clay-style miniature: brown layered hair, bangs and black blazer.
-const avatar=group(.2,.94,-.43,'avatar');avatar.name='laraib-chibi';
-const skin='#f7dfd2',hair='#68452e',jacket='#303532';
-ball(0,.34,0,.29,.38,.21,jacket,avatar);ball(0,.68,.02,.10,.12,.10,skin,avatar);
-for(const side of [-1,1]){ball(side*.13,-.02,.20,.12,.26,.13,jacket,avatar);ball(side*.13,-.22,.29,.13,.07,.19,'#242b27',avatar);const lapel=cube(side*.105,.5,.195,.13,.29,.035,.02,'#454b42',avatar);lapel.rotation.z=side*.27;}
+// Tomodachi-inspired Laraib, rebuilt from the user's character reference.
+const avatar=group(.2,.94,-.43,'avatar');avatar.name='laraib-chibi';avatar.userData.style='tomodachi';
+const skin='#f8e6dc',hair='#95572f',sweater='#b83238',boots='#785035';
+ball(0,.34,0,.235,.34,.16,sweater,avatar);ball(0,.69,.02,.075,.12,.075,skin,avatar);
+const sweaterHem=cube(0,.10,.01,.45,.10,.31,.04,'#9e2b32',avatar);
+for(let i=-3;i<=3;i++)rod([i*.05,.075,.173],[i*.05,.13,.173],.005,'#c54848',avatar);
+const skirt=m(new THREE.CylinderGeometry(.21,.28,.23,32), '#bd955d',avatar);skirt.name='avatar-tan-skirt';skirt.position.set(0,-.065,.02);
+for(const side of [-1,1]){ball(side*.115,-.245,.14,.064,.19,.075,'#353d40',avatar);cube(side*.115,-.40,.20,.145,.16,.21,.035,boots,avatar);}
 const head=new THREE.Group();head.name='avatar-head';head.position.y=1.04;avatar.add(head);
-ball(0,.03,-.06,.49,.53,.39,hair,head);ball(0,-.012,.085,.43,.43,.35,skin,head);
+ball(0,.025,-.065,.43,.46,.30,hair,head);ball(0,-.035,.09,.365,.40,.29,skin,head);ball(0,-.32,.13,.24,.13,.20,skin,head);
 for(const side of [-1,1]){
- ball(side*.38,-.12,.0,.14,.40,.24,hair,head);
- const curl=ball(side*.41,-.40,.04,.14,.18,.18,'#795137',head);curl.rotation.z=-side*.28;
- ball(side*.415,-.04,.08,.066,.105,.055,skin,head);ball(side*.43,-.14,.13,.024,.035,.019,'#dec381',head);
- const closedEyeCurve=new THREE.QuadraticBezierCurve3(new THREE.Vector3(side*.15-.049,.012,.438),new THREE.Vector3(side*.15,.070,.444),new THREE.Vector3(side*.15+.049,.012,.438));const closedEye=m(new THREE.TubeGeometry(closedEyeCurve,16,.011,6,false),'#302c27',head);closedEye.name='avatar-closed-eye';
- ball(side*.245,-.12,.377,.069,.031,.012,'#e6b6af',head);
- const brow=rod([side*.115,.135,.399],[side*.19,.14,.384],.012,hair,head);
+ const sideHair=ball(side*.35,-.13,-.015,.105,.32,.18,hair,head);sideHair.rotation.z=-side*.14;
+ ball(side*.32,-.37,-.04,.115,.16,.14,'#82482c',head);
+ ball(side*.365,-.07,.06,.05,.078,.04,skin,head);
+ const eye=ball(side*.15,.015,.356,.104,.077,.014,'#292828',head);eye.name='avatar-tomodachi-eye';
+ ball(side*.15,.006,.369,.090,.058,.012,'#fff8e8',head);
+ ball(side*.148,.006,.383,.046,.057,.009,'#8a4b25',head);ball(side*.145,.011,.392,.025,.045,.007,'#252627',head);
+ ball(side*.135,.037,.399,.016,.021,.006,'#fff9ed',head);
+ const lidCurve=new THREE.QuadraticBezierCurve3(new THREE.Vector3(side*.15-.11,.04,.377),new THREE.Vector3(side*.15,.13,.385),new THREE.Vector3(side*.15+.11,.04,.377));
+ m(new THREE.TubeGeometry(lidCurve,20,.016,6,false),'#292828',head);
+ for(let lash=0;lash<2;lash++)rod([side*(.225+lash*.016),.055-lash*.017,.376],[side*(.263+lash*.016),.077-lash*.02,.373],.008,'#292828',head);
+ rod([side*.09,.15,.35],[side*.215,.166,.338],.017,'#73452e',head);
+ ball(side*.235,-.13,.327,.052,.023,.008,'#e8bcb8',head);
 }
-for(const [x,y,z,angle] of [[-.23,.32,.29,-.4],[-.08,.36,.34,-.25],[.08,.36,.34,.2],[.23,.31,.29,.4]]){const bang=ball(x,y,z,.145,.235,.115,'#795137',head);bang.rotation.z=angle;}
-ball(0,-.075,.438,.022,.022,.015,skin,head);
-// Round wire glasses and a tiny double-curve :3 mouth.
-for(const side of [-1,1]){
- const rim=m(new THREE.TorusGeometry(.102,.013,8,40),'#574b3d',head);rim.name='avatar-glasses';rim.position.set(side*.15,.025,.445);
- rod([side*.245,.045,.425],[side*.37,.045,.27],.012,'#574b3d',head);
- ball(side*.246,-.13,.38,.075,.032,.014,'#e9b9b5',head);
-}
-rod([-.047,.04,.45],[.047,.04,.45],.012,'#574b3d',head);
-for(const side of [-1,1]){
- const curve=new THREE.QuadraticBezierCurve3(new THREE.Vector3(side*.082,-.17,.426),new THREE.Vector3(side*.05,-.255,.44),new THREE.Vector3(0,-.18,.442));
- const mouth=m(new THREE.TubeGeometry(curve,20,.013,8,false),'#895044',head);mouth.name='avatar-three-mouth';
-}
-
-const necklace=m(new THREE.TorusGeometry(.10,.009,6,28,Math.PI),'#d5b365',avatar);necklace.position.set(0,.57,.21);necklace.rotation.z=Math.PI;ball(0,.47,.22,.025,.027,.012,'#d5b365',avatar);
-const waveArm=new THREE.Group();waveArm.position.set(.29,.55,.0);avatar.add(waveArm);waveArm.rotation.z=-.3;ball(.09,.10,0,.10,.22,.11,jacket,waveArm);ball(.13,.32,.01,.083,.09,.075,skin,waveArm);
-ball(-.34,.39,.06,.10,.23,.11,jacket,avatar);ball(-.36,.20,.12,.075,.085,.07,skin,avatar);
+// Smooth, side-swept hair panels instead of separate round bangs.
+function sweptBang(points,color,z){const shape=new THREE.Shape();shape.moveTo(...points[0]);for(const segment of points.slice(1))shape.bezierCurveTo(...segment);shape.closePath();const mesh=m(new THREE.ExtrudeGeometry(shape,{depth:.035,bevelEnabled:true,bevelThickness:.012,bevelSize:.012,bevelSegments:2,curveSegments:20}),color,head);mesh.position.z=z;return mesh;}
+sweptBang([[-.39,.17],[-.45,.42,-.14,.52,.19,.40],[.14,.27,-.08,.12,-.30,.09],[-.35,.08,-.38,.11,-.39,.17]],'#9c5a30',.285);
+sweptBang([[.08,.42],[.29,.44,.40,.31,.39,.08],[.37,-.03,.34,-.13,.31,-.20],[.31,.10,.23,.25,.08,.42]],'#a26437',.258);
+ball(0,-.10,.389,.012,.017,.009,'#ba9583',head);
+const mouthCurve=new THREE.CatmullRomCurve3([new THREE.Vector3(-.065,-.205,.365),new THREE.Vector3(-.028,-.192,.375),new THREE.Vector3(0,-.205,.379),new THREE.Vector3(.028,-.192,.375),new THREE.Vector3(.065,-.205,.365)]);
+const tomodachiMouth=m(new THREE.TubeGeometry(mouthCurve,24,.009,6,false),'#714b43',head);tomodachiMouth.name='avatar-tomodachi-mouth';
+const collar=m(new THREE.TorusGeometry(.075,.017,8,28,Math.PI), '#8f262e',avatar);collar.position.set(0,.61,.16);collar.rotation.z=Math.PI;
+const waveArm=new THREE.Group();waveArm.position.set(.23,.49,.0);avatar.add(waveArm);waveArm.rotation.z=-.3;ball(.075,.09,0,.075,.20,.085,sweater,waveArm);ball(.11,.285,.01,.058,.075,.055,skin,waveArm);
+const leftSleeve=ball(-.24,.37,.07,.08,.21,.085,sweater,avatar);leftSleeve.rotation.z=-.25;ball(-.25,.18,.13,.055,.065,.05,skin,avatar);
 let waveRemaining=0;window.waveLaraib=()=>{if(!window.portfolioMotionPlaying)return;waveRemaining=2.4;};
 document.querySelector('#avatar-wave')?.addEventListener('click',()=>window.waveLaraib());
 // A real raised desk, drawer, thick worktop, textile runner and résumé paper.
