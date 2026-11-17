@@ -36,3 +36,6 @@ body[data-view="inside"] .document-content{font:400 16px/1.65 var(--body);paddin
 body[data-view="inside"] .document-content h2{font-size:27px}
 body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 @media(max-height:700px){.inside-view{gap:6px}.inside-heading{padding-top:25px}.inside-heading h1.study-title{font-size:25px;padding:7px 16px 9px}.inside-heading>p:last-child{display:none}.inside-view .room-directory a{min-height:48px;padding:9px 11px;font-size:14px}.inside-view .room-hint{font-size:11px}.inside-view .room-marker{font-size:11px;padding:6px 9px}}
+
+.inside-view .github-object{display:flex;align-items:center;gap:5px;background:#f2e4c3;color:#284632;border:1px solid #ad8959;min-height:44px;padding:7px 10px;font-size:12px;z-index:4}
+.inside-view .github-object:before{content:'';width:17px;height:17px;display:block;background:url('github-wall.svg') center/cover;border-radius:50%}
