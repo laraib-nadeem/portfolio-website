@@ -35,3 +35,7 @@ The root `vercel.json` publishes `dist/` directly, with no framework, dependency
 The site has no ChatGPT authentication. Leave production deployment protection disabled to allow recruiters to view it without logging in. The previous ChatGPT-hosted site is https://laraib-nadeem-folio-26.tdrmnjprr8.chatgpt.site.
 
 Third-party libraries, fonts, and images retain their respective licenses. Tommy's included demo font is for personal use; see `font-licenses/tommy.txt`.
+
+## Character model
+
+`dist/assets/models/laraib-tomodachi.glb` is the custom 3D character built from Laraib’s supplied front and side references. The study uses the same procedural meshes in `room-world.js`, including the interactive wave.

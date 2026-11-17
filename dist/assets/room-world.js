@@ -22,40 +22,54 @@ cube(0,1.88,-2.05,6,3.38,.17,.06,'#536f59');cube(-2.97,1.88,0,.16,3.38,4.15,.06,
 // Round woven rug and a richly coloured upholstered chair.
 ball(0,.22,.6,1.85,.035,1.15,'#8aa58b');const rugRing=m(new THREE.TorusGeometry(1,.035,8,70),'#d0c7a2');rugRing.rotation.x=-Math.PI/2;rugRing.scale.set(1.7,1,1);rugRing.position.set(0,.25,.6);
 const chair=group(.2,.24,-.48);cube(0,.52,0,1.15,.3,1,.18,'#53715b',chair);cube(0,1.08,-.38,1.15,.98,.2,.35,'#4f715b',chair);for(const side of [-1,1]){cube(side*.56,.83,.03,.17,.36,.88,.08,'#5f8065',chair);rod([side*.4,.45,-.24],[side*.46,0,-.28],.055,'#9a7958',chair);rod([side*.4,.45,.3],[side*.46,0,.4],.055,'#9a7958',chair);}const pillow=cube(0,1.0,-.19,.65,.52,.19,.13,'#efe0b8',chair);pillow.rotation.z=.09;
-// Tomodachi-inspired Laraib, rebuilt from the user's character reference.
-const avatar=group(.2,.94,-.43,'avatar');avatar.name='laraib-chibi';avatar.userData.style='tomodachi';
-const skin='#f8e6dc',hair='#95572f',sweater='#b83238',boots='#785035';
-ball(0,.34,0,.235,.34,.16,sweater,avatar);ball(0,.69,.02,.075,.12,.075,skin,avatar);
-const sweaterHem=cube(0,.10,.01,.45,.10,.31,.04,'#9e2b32',avatar);
-for(let i=-3;i<=3;i++)rod([i*.05,.075,.173],[i*.05,.13,.173],.005,'#c54848',avatar);
-const skirt=m(new THREE.CylinderGeometry(.21,.28,.23,32), '#bd955d',avatar);skirt.name='avatar-tan-skirt';skirt.position.set(0,-.065,.02);
-for(const side of [-1,1]){ball(side*.115,-.245,.14,.064,.19,.075,'#353d40',avatar);cube(side*.115,-.40,.20,.145,.16,.21,.035,boots,avatar);}
+// Custom 3D Tomodachi reference model: shaped face, layered hair and graphic eyes.
+const avatar=group(.2,.94,-.43,'avatar');avatar.name='laraib-chibi';avatar.userData.style='tomodachi-reference';avatar.rotation.y=.40;
+const skin='#f6e9d8',hair='#86502d',sweater='#b92937',boots='#785038';
+const body=cube(0,.34,0,.39,.55,.27,.09,sweater,avatar);body.name='tomodachi-red-sweater';
+ball(0,.67,0,.068,.13,.067,skin,avatar);
+cube(0,.075,.01,.40,.09,.28,.025,'#9f2432',avatar);
+for(let i=-3;i<=3;i++)rod([i*.047,.04,.159],[i*.047,.11,.159],.004,'#d44849',avatar);
+const skirt=m(new THREE.CylinderGeometry(.20,.255,.22,24),'#b99460',avatar);skirt.name='avatar-tan-skirt';skirt.position.set(0,-.07,.015);
+for(let i=0;i<12;i++){const a=i*Math.PI/6;rod([Math.sin(a)*.201,.025,Math.cos(a)*.201],[Math.sin(a)*.253,-.175,Math.cos(a)*.253],.004,'#977145',avatar);}
+for(const side of [-1,1]){ball(side*.108,-.25,.12,.058,.18,.065,'#30363c',avatar);cube(side*.108,-.40,.18,.14,.15,.19,.025,boots,avatar);ball(side*.108,-.41,.26,.069,.06,.08,boots,avatar);}
 const head=new THREE.Group();head.name='avatar-head';head.position.y=1.04;avatar.add(head);
-ball(0,.025,-.065,.43,.46,.30,hair,head);ball(0,-.035,.09,.365,.40,.29,skin,head);ball(0,-.32,.13,.24,.13,.20,skin,head);
+function avatarPanel(commands,color,z,parent=head,depth=0){const shape=new THREE.Shape();for(const [op,...p]of commands){if(op==='M')shape.moveTo(...p);else if(op==='L')shape.lineTo(...p);else if(op==='C')shape.bezierCurveTo(...p);else if(op==='Q')shape.quadraticCurveTo(...p);}shape.closePath();const geometry=depth?new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelSize:.022,bevelThickness:.022,bevelSegments:3,curveSegments:24}):new THREE.ShapeGeometry(shape,32);const part=m(geometry,new THREE.MeshBasicMaterial({color,side:THREE.DoubleSide}),parent);part.position.z=z;return part;}
+function faceOval(x,y,rx,ry,color,z,parent=head){const mesh=m(new THREE.CircleGeometry(1,48),new THREE.MeshBasicMaterial({color,side:THREE.DoubleSide}),parent);mesh.scale.set(rx,ry,1);mesh.position.set(x,y,z);return mesh;}
+// Full hair volume and two lobes at the nape match the side silhouette.
+ball(0,.03,-.095,.43,.47,.30,hair,head);
+for(const side of [-1,1]){const nape=ball(side*.26,-.36,-.09,.18,.24,.19,'#70422b',head);nape.rotation.z=-side*.23;ball(side*.365,-.08,.11,.047,.089,.045,skin,head);}
+const face=avatarPanel([['M',-.30,.30],['C',-.38,.19,-.38,-.06,-.32,-.25],['C',-.26,-.39,-.11,-.46,0,-.47],['C',.11,-.46,.26,-.39,.32,-.25],['C',.38,-.06,.38,.19,.30,.30],['C',.17,.43,-.17,.43,-.30,.30]],skin,.15,head,.09);face.name='tomodachi-shaped-face';
+// Eyes are broad printed shapes, not round bead eyes.
 for(const side of [-1,1]){
- const sideHair=ball(side*.35,-.13,-.015,.105,.32,.18,hair,head);sideHair.rotation.z=-side*.14;
- ball(side*.32,-.37,-.04,.115,.16,.14,'#82482c',head);
- ball(side*.365,-.07,.06,.05,.078,.04,skin,head);
- const eye=ball(side*.15,.015,.356,.104,.077,.014,'#292828',head);eye.name='avatar-tomodachi-eye';
- ball(side*.15,.006,.369,.090,.058,.012,'#fff8e8',head);
- ball(side*.148,.006,.383,.046,.057,.009,'#8a4b25',head);ball(side*.145,.011,.392,.025,.045,.007,'#252627',head);
- ball(side*.135,.037,.399,.016,.021,.006,'#fff9ed',head);
- const lidCurve=new THREE.QuadraticBezierCurve3(new THREE.Vector3(side*.15-.11,.04,.377),new THREE.Vector3(side*.15,.13,.385),new THREE.Vector3(side*.15+.11,.04,.377));
- m(new THREE.TubeGeometry(lidCurve,20,.016,6,false),'#292828',head);
- for(let lash=0;lash<2;lash++)rod([side*(.225+lash*.016),.055-lash*.017,.376],[side*(.263+lash*.016),.077-lash*.02,.373],.008,'#292828',head);
- rod([side*.09,.15,.35],[side*.215,.166,.338],.017,'#73452e',head);
- ball(side*.235,-.13,.327,.052,.023,.008,'#e8bcb8',head);
+ const eyeGroup=new THREE.Group();eyeGroup.position.set(side*.155,.005,0);eyeGroup.scale.x=side;head.add(eyeGroup);
+ const outline=[['M',-.105,.014],['C',-.066,.104,.037,.113,.123,.027],['L',.163,.037],['L',.114,-.010],['C',.074,-.074,-.032,-.082,-.100,-.030],['Q',-.114,-.012,-.105,.014]];
+ const eye=avatarPanel(outline,'#222126',.283,eyeGroup);eye.name='tomodachi-graphic-eye';
+ avatarPanel([['M',-.087,.007],['C',-.053,.063,.035,.077,.096,.020],['C',.080,-.050,-.023,-.057,-.085,-.023],['L',-.087,.007]],'#fffdf0',.287,eyeGroup);
+ faceOval(-.012,-.003,.058,.061,'#b9792f',.290,eyeGroup);faceOval(-.009,.008,.036,.047,'#292329',.294,eyeGroup);
+ faceOval(-.035,.032,.018,.022,'#fffef1',.298,eyeGroup);faceOval(.019,-.032,.008,.008,'#e9bb58',.298,eyeGroup);
+ for(let i=0;i<2;i++)avatarPanel([['M',.078+i*.019,-.033-i*.004],['L',.111+i*.019,-.067-i*.009],['L',.120+i*.019,-.050-i*.009]],'#242127',.292,eyeGroup);
+ avatarPanel([['M',-.080,.160],['Q',.005,.196,.089,.164],['L',.088,.145],['Q',.0,.168,-.081,.140]],'#633b28',.278,eyeGroup);
+ faceOval(side*.24,-.165,.042,.014,'#ead0c5',.274);
 }
-// Smooth, side-swept hair panels instead of separate round bangs.
-function sweptBang(points,color,z){const shape=new THREE.Shape();shape.moveTo(...points[0]);for(const segment of points.slice(1))shape.bezierCurveTo(...segment);shape.closePath();const mesh=m(new THREE.ExtrudeGeometry(shape,{depth:.035,bevelEnabled:true,bevelThickness:.012,bevelSize:.012,bevelSegments:2,curveSegments:20}),color,head);mesh.position.z=z;return mesh;}
-sweptBang([[-.39,.17],[-.45,.42,-.14,.52,.19,.40],[.14,.27,-.08,.12,-.30,.09],[-.35,.08,-.38,.11,-.39,.17]],'#9c5a30',.285);
-sweptBang([[.08,.42],[.29,.44,.40,.31,.39,.08],[.37,-.03,.34,-.13,.31,-.20],[.31,.10,.23,.25,.08,.42]],'#a26437',.258);
-ball(0,-.10,.389,.012,.017,.009,'#ba9583',head);
-const mouthCurve=new THREE.CatmullRomCurve3([new THREE.Vector3(-.065,-.205,.365),new THREE.Vector3(-.028,-.192,.375),new THREE.Vector3(0,-.205,.379),new THREE.Vector3(.028,-.192,.375),new THREE.Vector3(.065,-.205,.365)]);
-const tomodachiMouth=m(new THREE.TubeGeometry(mouthCurve,24,.009,6,false),'#714b43',head);tomodachiMouth.name='avatar-tomodachi-mouth';
-const collar=m(new THREE.TorusGeometry(.075,.017,8,28,Math.PI), '#8f262e',avatar);collar.position.set(0,.61,.16);collar.rotation.z=Math.PI;
-const waveArm=new THREE.Group();waveArm.position.set(.23,.49,.0);avatar.add(waveArm);waveArm.rotation.z=-.3;ball(.075,.09,0,.075,.20,.085,sweater,waveArm);ball(.11,.285,.01,.058,.075,.055,skin,waveArm);
-const leftSleeve=ball(-.24,.37,.07,.08,.21,.085,sweater,avatar);leftSleeve.rotation.z=-.25;ball(-.25,.18,.13,.055,.065,.05,skin,avatar);
+avatarPanel([['M',-.012,-.109],['L',.008,-.102],['L',.017,-.119],['L',-.014,-.119]],'#80685b',.284);
+const mouthCurve=new THREE.CatmullRomCurve3([new THREE.Vector3(-.060,-.235,.28),new THREE.Vector3(-.025,-.222,.285),new THREE.Vector3(0,-.235,.287),new THREE.Vector3(.025,-.222,.285),new THREE.Vector3(.060,-.235,.28)]);const mouth=m(new THREE.TubeGeometry(mouthCurve,24,.007,6,false),'#65494a',head);mouth.name='tomodachi-small-mouth';
+// Swept fringe with pointed strands, visible parting and orange/red streaks.
+const fringe=avatarPanel([['M',-.405,.18],['C',-.46,.42,-.22,.58,.105,.47],['L',.23,.36],['C',.11,.21,-.06,.10,-.265,.062],['Q',-.20,.19,-.16,.28],['Q',-.29,.12,-.40,.13]],'#946035',.285,head,.035);fringe.name='tomodachi-side-fringe';
+avatarPanel([['M',.105,.47],['C',.29,.48,.42,.31,.405,.12],['Q',.385,-.03,.335,-.15],['Q',.345,.15,.22,.32],['L',.105,.47]],'#96643a',.259,head,.045);
+avatarPanel([['M',.255,.16],['Q',.39,.035,.322,-.17],['Q',.29,-.27,.205,-.32],['Q',.30,-.18,.245,-.12],['Q',.31,-.01,.255,.16]],'#a86b31',.279,head,.035);
+avatarPanel([['M',-.335,.09],['Q',-.40,-.10,-.31,-.26],['L',-.26,-.31],['Q',-.40,-.31,-.40,-.20],['Q',-.42,-.02,-.335,.09]],'#9f6a31',.27,head,.03);
+for(const [color,points]of [
+ ['#d6502e',[['M',.087,.44],['Q',-.04,.23,-.28,.10],['Q',-.09,.25,.087,.44]]],
+ ['#b54d25',[['M',-.28,.47],['Q',-.39,.38,-.405,.21],['Q',-.395,.42,-.28,.47]]],
+ ['#d85a2c',[['M',.279,.10],['Q',.32,-.08,.23,-.19],['Q',.35,-.12,.279,.10]]],
+ ['#c19142',[['M',.105,.405],['Q',-.01,.22,-.19,.13],['Q',-.04,.24,.105,.405]]]
+])avatarPanel(points,color,.365);
+// Small white pointed shirt collar, clearly visible over the red sweater.
+avatarPanel([['M',-.07,.66],['L',0,.60],['L',-.06,.51],['L',-.12,.60]],'#f3edda',.173,avatar,.008);
+avatarPanel([['M',.07,.66],['L',0,.60],['L',.06,.51],['L',.12,.60]],'#f3edda',.173,avatar,.008);
+const waveArm=new THREE.Group();waveArm.name='avatar-wave-arm';waveArm.position.set(.23,.48,.0);avatar.add(waveArm);waveArm.rotation.z=2.5;
+ball(.07,.095,0,.073,.19,.08,sweater,waveArm);ball(.10,.275,.01,.052,.064,.05,skin,waveArm);
+rod([-.22,.49,.04],[-.19,.31,.10],.067,sweater,avatar);rod([-.19,.31,.10],[.09,.35,.19],.064,sweater,avatar);ball(.10,.35,.20,.05,.045,.04,skin,avatar);
 let waveRemaining=0;window.waveLaraib=()=>{if(!window.portfolioMotionPlaying)return;waveRemaining=2.4;};
 document.querySelector('#avatar-wave')?.addEventListener('click',()=>window.waveLaraib());
 // A real raised desk, drawer, thick worktop, textile runner and résumé paper.
@@ -167,7 +181,7 @@ function updateResumePaper(){
 }
 function render(){updateResumePaper();camera.updateProjectionMatrix();scene.updateMatrixWorld(true);camera.updateMatrixWorld(true);renderer.render(scene,camera);markerPositions();}
 function size(){const rect=host.getBoundingClientRect(),r={width:host.clientWidth||rect.width,height:host.clientHeight||rect.height};if(!r.width||!r.height)return;camera.updateMatrixWorld(true);room.updateMatrixWorld(true);const bounds=new THREE.Box3().setFromObject(room),corners=[];for(const x of [bounds.min.x,bounds.max.x])for(const y of [bounds.min.y,bounds.max.y])for(const z of [bounds.min.z,bounds.max.z])corners.push(new THREE.Vector3(x,y,z).applyMatrix4(camera.matrixWorldInverse));const xs=corners.map(p=>p.x),ys=corners.map(p=>p.y),minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys),aspect=r.width/r.height;const height=Math.max(maxY-minY,(maxX-minX)/aspect)*1.12,cx=(minX+maxX)/2,cy=(minY+maxY)/2;camera.left=cx-height*aspect/2;camera.right=cx+height*aspect/2;camera.top=cy+height/2;camera.bottom=cy-height/2;camera.updateProjectionMatrix();renderer.setSize(r.width,r.height,false);render();}
-function tick(t){frame=requestAnimationFrame(tick);if(!visible||document.hidden||t-last<40)return;const dt=last?Math.min((t-last)/1000,.1):0;last=t;const moving=window.portfolioMotionPlaying;if(moving){avatar.scale.y=1+Math.sin(t*.0015)*.008;if(waveRemaining>0){waveRemaining=Math.max(0,waveRemaining-dt);waveArm.rotation.z=-.9+Math.sin(waveRemaining*13)*.32;head.rotation.z=Math.sin(waveRemaining*3)*.055;}else{waveArm.rotation.z=-.3;head.rotation.z=0;}room.rotation.y+=(target-room.rotation.y)*.1;cat.scale.y=1+Math.sin(t*.002)*.025;bunny.rotation.y=Math.sin(t*.001)*.1;}render();}
+function tick(t){frame=requestAnimationFrame(tick);if(!visible||document.hidden||t-last<40)return;const dt=last?Math.min((t-last)/1000,.1):0;last=t;const moving=window.portfolioMotionPlaying;if(moving){avatar.scale.y=1+Math.sin(t*.0015)*.008;if(waveRemaining>0){waveRemaining=Math.max(0,waveRemaining-dt);waveArm.rotation.z=-.9+Math.sin(waveRemaining*13)*.32;head.rotation.z=Math.sin(waveRemaining*3)*.055;}else{waveArm.rotation.z=2.5;head.rotation.z=0;}room.rotation.y+=(target-room.rotation.y)*.1;cat.scale.y=1+Math.sin(t*.002)*.025;bunny.rotation.y=Math.sin(t*.001)*.1;}render();}
 function act(route){if(route==='avatar'){window.waveLaraib();return;}if(route==='github'||route==='linkedin'){document.querySelector('#'+route+'-wall-link')?.click();return;}if(route==='lamp'){document.querySelector('#lamp-switch').click();return;}window.location.hash=route;}
 canvas.addEventListener('pointerdown',e=>{if(e.button!==0)return;drag={x:e.clientX,y:e.clientY,angle:target};dragged=false;});canvas.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.abs(dx)>8&&Math.abs(dx)>Math.abs(dy)){dragged=true;target=THREE.MathUtils.clamp(drag.angle+dx*.003,-.3,.3);room.rotation.y=target;render();}});for(const ev of ['pointerup','pointercancel','pointerleave'])canvas.addEventListener(ev,()=>drag=null);
 // Reveal the GitHub label only when the pointer is over its actual 3D frame.
