@@ -33,7 +33,7 @@ for(const side of [-1,1]){
  ball(side*.38,-.12,.0,.14,.40,.24,hair,head);
  const curl=ball(side*.41,-.40,.04,.14,.18,.18,'#795137',head);curl.rotation.z=-side*.28;
  ball(side*.415,-.04,.08,.066,.105,.055,skin,head);ball(side*.43,-.14,.13,.024,.035,.019,'#dec381',head);
- ball(side*.15,.025,.408,.033,.047,.022,'#302c27',head);ball(side*.14,.042,.426,.009,.012,.008,'#fff5db',head);
+ const closedEyeCurve=new THREE.QuadraticBezierCurve3(new THREE.Vector3(side*.15-.049,.012,.438),new THREE.Vector3(side*.15,.070,.444),new THREE.Vector3(side*.15+.049,.012,.438));const closedEye=m(new THREE.TubeGeometry(closedEyeCurve,16,.011,6,false),'#302c27',head);closedEye.name='avatar-closed-eye';
  ball(side*.245,-.12,.377,.069,.031,.012,'#e6b6af',head);
  const brow=rod([side*.115,.135,.399],[side*.19,.14,.384],.012,hair,head);
 }
