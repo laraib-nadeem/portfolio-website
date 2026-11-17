@@ -99,3 +99,7 @@ body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 @media(max-width:350px){.inside-view .room-directory .directory-art{width:24px;height:24px;flex-basis:24px}}
 
 .inside-view .room-directory .directory-arrow{display:block;flex:0 0 20px;width:20px;height:20px;margin-left:auto;color:currentColor;pointer-events:none}
+
+/* Small pastel tulip clusters in the green space below the dollhouse. */
+.inside-view .study-tulips{position:absolute;left:10px;bottom:78px;width:calc(100% - 20px);height:clamp(42px,9vh,80px);object-fit:contain;pointer-events:none;user-select:none;z-index:1}
+@media(max-height:600px){.inside-view .study-tulips{height:38px}}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 90" fill="none">
+<defs>
+ <linearGradient id="leaf" x2="1" y2="1"><stop stop-color="#b8c68b"/><stop offset="1" stop-color="#668950"/></linearGradient>
+ <linearGradient id="pink" x2="1" y2="1"><stop stop-color="#f3c1b0"/><stop offset="1" stop-color="#cb7d78"/></linearGradient>
+ <linearGradient id="cream" x2="1" y2="1"><stop stop-color="#fff0c9"/><stop offset="1" stop-color="#d3bd82"/></linearGradient>
+ <linearGradient id="peach" x2="1" y2="1"><stop stop-color="#f5c79c"/><stop offset="1" stop-color="#d58e69"/></linearGradient>
+ <g id="stem"><path d="M0 78Q-3 54 0 29" stroke="#8fa86e" stroke-width="3" stroke-linecap="round"/><path d="M0 69Q-17 65-17 45Q-3 47 0 69Z" fill="url(#leaf)"/><path d="M0 77Q17 66 16 51Q4 53 0 77Z" fill="url(#leaf)"/></g>
+ <path id="cup" d="M-13 11Q-5 12 0 20Q5 11 13 11L12 27Q10 41 0 42Q-11 41-13 27Z"/>
+ <g id="flower"><use href="#stem"/><use href="#cup" fill="url(#pink)"/><path d="M-7 16Q-7 29 0 35Q7 28 7 16Q0 19 0 24Q-2 19-7 16Z" fill="#f7d0bd" opacity=".55"/></g>
+ <g id="yellow"><use href="#stem"/><use href="#cup" fill="url(#cream)"/><path d="M-6 17Q-6 29 0 35Q7 28 7 17Q0 20 0 24Q-2 20-6 17Z" fill="#fff5d6" opacity=".65"/></g>
+ <g id="orange"><use href="#stem"/><use href="#cup" fill="url(#peach)"/><path d="M-6 17Q-6 29 0 35Q7 28 7 17Q0 20 0 24Q-2 20-6 17Z" fill="#ffe2b8" opacity=".55"/></g>
+</defs>
+<ellipse cx="67" cy="84" rx="49" ry="3" fill="#10291d" opacity=".2"/><ellipse cx="333" cy="84" rx="49" ry="3" fill="#10291d" opacity=".2"/>
+<use href="#yellow" transform="translate(35 17) rotate(-12) scale(.78)"/><use href="#flower" transform="translate(66 0) rotate(-4)"/><use href="#orange" transform="translate(91 16) rotate(12) scale(.8)"/>
+<use href="#flower" transform="translate(307 16) rotate(-12) scale(.8)"/><use href="#yellow" transform="translate(335 0) rotate(5)"/><use href="#orange" transform="translate(365 19) rotate(14) scale(.75)"/>
+</svg>
