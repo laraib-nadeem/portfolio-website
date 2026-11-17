@@ -1,0 +1,38 @@
+/* Study-only phone layout; the completed welcome composition is untouched. */
+body[data-view="inside"]{position:fixed;inset:0;height:var(--phone-height,100dvh);min-height:0;overflow:hidden;overscroll-behavior:none}
+body[data-view="inside"] .app-header{position:absolute;top:0;left:0;right:0;width:100%;max-width:460px;height:calc(48px + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) 18px 0;gap:12px}
+body[data-view="inside"] .signature{font-size:24px}
+body[data-view="inside"] .app-header>span{font-size:12px}
+body[data-view="inside"] .motion-toggle{min-height:34px;padding:4px 13px;font-size:12px}
+body[data-view="inside"] #portfolio{position:absolute;inset:calc(48px + env(safe-area-inset-top,0px)) 0 0;overflow:hidden;min-height:0}
+.inside-view{width:100%;max-width:460px;height:100%;min-height:0;margin:0 auto;padding:8px 14px max(10px,env(safe-area-inset-bottom,0px));display:grid;grid-template-rows:auto minmax(0,1fr) auto auto auto;gap:8px}
+.inside-view[hidden]{display:none}
+.inside-heading{padding:31px 0 0;text-align:center;min-width:0}
+.back-outside{top:-3px;left:0;min-height:32px;padding:3px 8px;font-size:12px;color:#dfd8b9}
+.inside-heading h1.study-title{font-size:29px;gap:10px;padding:9px 18px 11px;margin:0 auto}
+.inside-heading>p:last-child{font-size:13px;line-height:1.4;margin:8px 0 0;color:#d5dec7}
+.inside-view .room-frame{width:100%;height:100%;min-height:0;margin:0;top:auto;border:1px solid #b5b28b66;border-radius:24px;background:radial-gradient(ellipse at 50% 45%,#56715488,#223b2e 76%);box-shadow:inset 0 1px 0 #e2ddbb22,0 4px 0 #0e241b;overflow:hidden;touch-action:pan-y}
+.inside-view .room-marker{min-height:44px;padding:7px 10px;border-radius:18px;font:600 12px/1.2 var(--body);box-shadow:1px 2px 0 #938365;border:1px solid #b4aa82}
+.inside-view .window-object,.inside-view .letter-object{display:none}
+.inside-view .lamp-control{right:8px;bottom:8px;min-height:36px;border-radius:18px;padding:5px 11px;font-size:11px;z-index:4}
+.inside-view .room-directory{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:2px 0 0}
+.inside-view .room-directory a{position:relative;justify-content:flex-start;gap:8px;min-height:52px;padding:10px 13px;border:1px solid #b8b38d;border-radius:18px;background:linear-gradient(#f2e5c4,#e4d7b2);color:#294631;box-shadow:0 3px 0 #827f5d;font:600 15px/1.2 var(--body)}
+.inside-view .room-directory a:before{content:'';position:absolute;inset:4px;border:1px dashed #76866a66;border-radius:13px;pointer-events:none}
+.inside-view .room-directory a span{color:#486649;font:700 20px/1 'Pixelify Sans',monospace;width:22px;text-align:center}
+.inside-view .room-directory a i{margin-left:auto;font-style:normal;font-size:16px}
+.inside-view .room-directory a:active{transform:translateY(2px);box-shadow:0 1px 0 #827f5d}
+.inside-view .room-hint{font-size:12px;line-height:1.4;margin:0 auto;max-width:34ch;grid-row:3}
+.inside-view .room-directory{grid-row:4}
+.inside-view .trinket-credits{position:relative;font-size:10px;line-height:1.3;margin:0;grid-row:5;z-index:5}
+.inside-view .trinket-credits summary{min-height:24px;padding:4px;line-height:16px}
+.inside-view .trinket-credits[open] p{position:absolute;bottom:28px;left:0;right:0;margin:0;padding:12px;border:1px solid #9ea787;background:#243d2e;border-radius:12px;font-size:12px}
+body[data-view="inside"] dialog{width:calc(100% - 16px);max-width:640px;height:calc(var(--phone-height,100dvh) - 24px);max-height:calc(100% - 24px);border-radius:18px}
+body[data-view="inside"] .document-header{padding:8px 12px;gap:8px;min-height:58px}
+body[data-view="inside"] .document-header>span{font:700 24px 'Pixelify Sans',monospace}
+body[data-view="inside"] .document-header>div{gap:5px}
+body[data-view="inside"] .document-header a{font-size:12px}
+body[data-view="inside"] .document-header button{min-width:44px;min-height:44px}
+body[data-view="inside"] .document-content{font:400 16px/1.65 var(--body);padding:22px 20px 30px;overflow-x:hidden}
+body[data-view="inside"] .document-content h2{font-size:27px}
+body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
+@media(max-height:700px){.inside-view{gap:6px}.inside-heading{padding-top:25px}.inside-heading h1.study-title{font-size:25px;padding:7px 16px 9px}.inside-heading>p:last-child{display:none}.inside-view .room-directory a{min-height:48px;padding:9px 11px;font-size:14px}.inside-view .room-hint{font-size:11px}.inside-view .room-marker{font-size:11px;padding:6px 9px}}

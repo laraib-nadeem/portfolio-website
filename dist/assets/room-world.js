@@ -1,9 +1,9 @@
 import * as THREE from './vendor/three.module.js';
 const host=document.querySelector('#room-frame'),canvas=document.querySelector('#room-canvas');let renderer;
-try{renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});}catch(error){canvas.hidden=true;}
+try{renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'default'});}catch(error){canvas.hidden=true;}
 if(renderer)buildRoom();
 function buildRoom(){
-renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.7));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,3));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
 const scene=new THREE.Scene(),camera=new THREE.OrthographicCamera(-4,4,4,-4,.1,70);camera.position.set(6,5.5,9);camera.lookAt(0,1.3,0);
 scene.add(new THREE.HemisphereLight(0xfff3d7,0x46654a,2.2));const light=new THREE.DirectionalLight(0xffdfac,3.5);light.position.set(-3,8,7);light.castShadow=true;light.shadow.mapSize.set(1024,1024);Object.assign(light.shadow.camera,{left:-5,right:5,top:6,bottom:-5});light.shadow.normalBias=.025;scene.add(light);const fill=new THREE.DirectionalLight(0xb6d3c2,1.3);fill.position.set(5,4,-3);scene.add(fill);
 const room=new THREE.Group();scene.add(room);const pickables=[],materials={};
