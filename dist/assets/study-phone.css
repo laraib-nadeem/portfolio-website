@@ -91,3 +91,5 @@ body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 #study-sound{position:absolute;right:8px;bottom:8px;z-index:5;min-width:36px;min-height:36px;border:1px solid #a9b18e;border-radius:50%;background:#243e30dd;color:#ede0bc;font-size:16px}
 .character-speech:before{width:8px;height:8px;bottom:-5px}
 .is-opening-envelope #study-sound{visibility:hidden}
+
+.inside-view .room-frame .character-speech[hidden],#study-sound[hidden]{display:none!important}
