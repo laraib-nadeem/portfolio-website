@@ -1,0 +1,18 @@
+/* Keep every document's content scrollable while its close/back controls stay reachable. */
+#document-dialog{max-height:calc(var(--phone-height,100dvh) - 24px)}
+#document-dialog .document-shell{height:100%;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+#document-dialog .document-header,#document-dialog .document-footer{flex:0 0 auto}
+#document-dialog .document-header{flex-wrap:wrap}
+#document-dialog .document-content{flex:1 1 0;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;overflow-wrap:anywhere;padding-bottom:max(32px,env(safe-area-inset-bottom,0px));scrollbar-gutter:stable}
+#document-dialog .document-footer{margin-top:0;padding-bottom:max(8px,env(safe-area-inset-bottom,0px))}
+/* Short screens can scroll the study instead of squeezing the room out of view. */
+body[data-view="inside"] #portfolio{overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
+body[data-view="inside"] .inside-view{min-height:560px}
+/* Chat history shrinks to fit above the input when a phone keyboard opens. */
+body[data-view="inside"] #study-assistant{max-height:calc(var(--phone-height,100dvh) - 24px);overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
+#study-assistant header,#assistant-suggestions,#assistant-form,.assistant-note{flex-shrink:0}
+#assistant-messages{flex:1 1 auto;min-height:0;overflow-y:auto;touch-action:pan-y;-webkit-overflow-scrolling:touch;overflow-wrap:anywhere}
+/* The separate résumé uses normal page scrolling, including its final section. */
+body.resume-page{position:static;height:auto;min-height:100svh;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:auto}
+.resume-page .document-content{height:auto;max-height:none;overflow:visible;overflow-wrap:anywhere;padding-bottom:max(48px,env(safe-area-inset-bottom,0px))}
+@media print{body.resume-page{min-height:0;overflow:visible}.resume-page .document-content{padding-bottom:0}}
