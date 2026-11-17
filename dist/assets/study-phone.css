@@ -55,3 +55,8 @@ body[data-view="inside"] .document-content h3{font-size:17px;line-height:1.4}
 
 /* Keep the room unobstructed while its visual design is being refined. */
 .inside-view .room-frame .room-marker{display:none}
+
+.inside-view .room-frame .projects-frame-label{display:flex;align-items:center;opacity:0;pointer-events:none;transform:translate(-50%,calc(-50% - 32px));transition:opacity .15s ease;background:#f2e4c3;color:#284632;border:1px solid #ad8959;min-height:44px;padding:7px 12px;border-radius:18px;font:600 12px/1.2 var(--body);z-index:4}
+.inside-view .room-frame.projects-hover .projects-frame-label,.inside-view .room-frame .projects-frame-label:focus-visible{opacity:1}
+.inside-view .room-frame .projects-frame-label:focus-visible{pointer-events:auto}
+@media(prefers-reduced-motion:reduce){.inside-view .room-frame .projects-frame-label{transition:none}}
