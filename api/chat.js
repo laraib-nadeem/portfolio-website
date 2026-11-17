@@ -33,7 +33,9 @@ export default async function handler(req, res) {
     });
     return res.status(200).json({answer:output.answer,links:[...new Set(output.destinations)].map(id=>destinations[id])});
   } catch(error) {
-    console.error('Portfolio assistant request failed',{name:error.name,status:error.statusCode});
+    const detail = String(error.message || '') + String(error.cause?.message || '');
+    const reason = /customer_verification_required|payment method|verify your/i.test(detail) ? 'verification_required' : /insufficient_funds|credits|balance/i.test(detail) ? 'credits_required' : /unauthorized|authentication|OIDC|API key/i.test(detail) ? 'authentication_required' : 'request_failed';
+    console.error('Portfolio assistant request failed',{name:error.name,status:error.statusCode,reason});
     return res.status(503).json({error:'My AI connection is resting right now. Please try again shortly, or explore my résumé and projects below.'});
   }
 }
