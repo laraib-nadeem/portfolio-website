@@ -124,8 +124,25 @@ function stitches(a,b,parent){for(let i=0;i<18;i++){const t=i/18,u=(i+.52)/18;ro
 stitches([-.64,-.42],[0,.08],envelope);stitches([0,.08],[.64,-.42],envelope);stitches([-.62,-.03],[0,-.55],flapHinge);stitches([0,-.55],[.62,-.03],flapHinge);
 const heartShape=new THREE.Shape();heartShape.moveTo(0,-.1);heartShape.bezierCurveTo(-.22,.05,-.16,.24,0,.12);heartShape.bezierCurveTo(.16,.24,.22,.05,0,-.1);const heart=m(new THREE.ExtrudeGeometry(heartShape,{depth:.018,bevelEnabled:true,bevelSize:.018,bevelThickness:.015,bevelSegments:3,steps:1}),material('#d2c9bd',{metalness:.65,roughness:.3}),flapHinge);heart.position.set(0,-.47,.07);heart.scale.setScalar(.8);
 let envelopeTween=null,envelopeResolve=null,envelopeCamera=null;
-window.openDeskEnvelope=()=>new Promise(resolve=>{host.classList.add('is-opening-envelope');envelopeResolve=resolve;if(!window.gsap||!window.portfolioMotionPlaying){flapHinge.rotation.x=-2.65;insert.position.set(0,.56,.23);insert.scale.y=1;render();envelopeResolve=null;resolve();return;}envelopeCamera={left:camera.left,right:camera.right,top:camera.top,bottom:camera.bottom,zoom:camera.zoom};scene.updateMatrixWorld(true);camera.updateMatrixWorld(true);const center=envelope.localToWorld(new THREE.Vector3(0,0,.05)).applyMatrix4(camera.matrixWorldInverse),halfW=(camera.right-camera.left)/2,halfH=(camera.top-camera.bottom)/2;envelopeTween=window.gsap.timeline({onUpdate:render,onComplete:()=>{envelopeResolve=null;resolve();}}).to(camera,{left:center.x-halfW,right:center.x+halfW,top:center.y+halfH,bottom:center.y-halfH,zoom:3.2,duration:.65,ease:'power2.inOut'},0).to(flapHinge.rotation,{x:-2.65,duration:.6,ease:'power2.inOut'},.2).to(insert.position,{y:.56,z:.23,duration:.85,ease:'power3.out'},.65).to(insert.scale,{y:1,duration:.8,ease:'power2.out'},.65);});
-window.resetDeskEnvelope=()=>{host.classList.remove('is-opening-envelope');envelopeTween?.kill();envelopeResolve?.();envelopeResolve=null;if(envelopeCamera){Object.assign(camera,envelopeCamera);envelopeCamera=null;}flapHinge.rotation.x=0;insert.position.set(0,-.03,.023);insert.scale.y=.61;render();};
+window.openDeskEnvelope=()=>new Promise(resolve=>{
+ host.classList.add('is-opening-envelope');envelopeResolve=resolve;
+ const facing=Math.atan2(camera.position.x-envelope.position.x,camera.position.z-envelope.position.z)-room.rotation.y;
+ envelopeCamera={left:camera.left,right:camera.right,top:camera.top,bottom:camera.bottom,zoom:camera.zoom};
+ if(!window.gsap||!window.portfolioMotionPlaying){envelope.position.set(.35,1.95,1.2);envelope.rotation.set(0,facing,0);flapHinge.rotation.x=-2.65;insert.position.set(0,.92,.075);insert.scale.y=1;render();envelopeResolve=null;resolve();return;}
+ const halfW=(camera.right-camera.left)/2,halfH=(camera.top-camera.bottom)/2;
+ // Aim the close-up at the final upright pose, with room above for the rising sheet.
+ const uprightCenter=new THREE.Vector3(.35,2.40,1.2).applyMatrix4(room.matrixWorld).applyMatrix4(camera.matrixWorldInverse);
+ const zoom=Math.min(halfW*2/2.15,halfH*2/2.6);
+ envelopeTween=window.gsap.timeline({onUpdate:render,onComplete:()=>{envelopeResolve=null;resolve();}})
+ .to(envelope.position,{y:1.95,z:1.2,duration:.65,ease:'power2.inOut'},0)
+ .to(envelope.rotation,{x:0,y:facing,z:0,duration:.65,ease:'power2.inOut'},0)
+ .to(camera,{left:uprightCenter.x-halfW,right:uprightCenter.x+halfW,top:uprightCenter.y+halfH,bottom:uprightCenter.y-halfH,zoom,duration:.7,ease:'power2.inOut'},.05)
+ .to(flapHinge.rotation,{x:-2.65,duration:.5,ease:'power2.inOut'},.72)
+ .to(insert.position,{y:.92,z:.075,duration:.85,ease:'power3.out'},1.23)
+ .to(insert.scale,{y:1,duration:.7,ease:'power2.out'},1.23)
+ .to(insert.position,{y:1.04,duration:.25,ease:'sine.out'},2.08);
+});
+window.resetDeskEnvelope=()=>{host.classList.remove('is-opening-envelope');envelopeTween?.kill();envelopeResolve?.();envelopeResolve=null;if(envelopeCamera){Object.assign(camera,envelopeCamera);envelopeCamera=null;}envelope.position.set(.35,1.405,.95);envelope.rotation.set(-Math.PI/2,0,-.1);flapHinge.rotation.x=0;insert.position.set(0,-.03,.023);insert.scale.y=.61;render();};
 const cat=group(-2.1,.3,1.0,'resume');ball(0,.15,0,.34,.17,.22,'#ead5b1',cat);ball(.18,.28,.07,.18,.17,.17,'#efdfc1',cat);for(const side of [-1,1]){const ear=m(new THREE.ConeGeometry(.06,.14,3),'#c59c74',cat);ear.position.set(.18+side*.1,.44,.06);ball(.18+side*.055,.3,.23,.012,.009,.01,'#4d5137',cat);}const tail=m(new THREE.TorusGeometry(.13,.04,8,20,Math.PI*1.6),'#b08a64',cat);tail.rotation.x=Math.PI/2;tail.position.set(-.2,.15,-.06);
 // A mushroom task lamp is a real light switch, not an unrelated decoration.
 const mushroom=group(-1.3,1.4,-.05,'lamp');rod([0,0,0],[0,.33,0],.05,'#d8cba7',mushroom);ball(0,.35,0,.24,.12,.22,'#c2825d',mushroom);for(const[x,z]of [[-.1,.06],[.08,.08],[.04,-.08]])ball(x,.43,z,.035,.015,.035,'#f3e4c2',mushroom);const lampLight=new THREE.PointLight(0xffcf83,0,4);lampLight.position.set(-1.1,1.85,.5);room.add(lampLight);
