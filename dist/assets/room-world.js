@@ -25,7 +25,7 @@ const chair=group(.36,.24,-.18);cube(0,.52,0,1.15,.3,1,.18,'#53715b',chair);cube
 // Image-based Tomodachi character seated at her laptop, replacing the modeled avatar.
 const avatar=group(.34,2.015,.24,'avatar');avatar.name='laraib-chibi';avatar.userData.style='tomodachi-image';avatar.rotation.y=.58;avatar.rotation.z=-.055;
 const head=photo('assets/tomodachi-seated.webp',2.40,2.40*1024/1536,avatar);head.name='avatar-head';head.material.alphaTest=.96;head.material.depthWrite=true;
-let waveRemaining=0;window.waveLaraib=()=>{window.advanceStudyTip?.();if(!window.portfolioMotionPlaying)return;waveRemaining=1.5;};
+let waveRemaining=0;window.waveLaraib=()=>{if(!window.portfolioMotionPlaying)return;waveRemaining=1.5;};
 document.querySelector('#avatar-wave')?.addEventListener('click',()=>window.waveLaraib());
 // A real raised desk, drawer, thick worktop, textile runner and résumé paper.
 const desk=group(.2,0,.78,'resume');cube(0,1.25,0,3.5,.2,1.45,.3,'#ddbc8c',desk);for(const x of [-1.35,1.35])for(const z of [-.45,.45])rod([x,1.15,z],[x*1.04,.2,z*1.07],.085,'#ad8358',desk);cube(0,1.02,.2,2.6,.3,.7,.05,'#bf966a',desk);cube(0,1.0,.58,.9,.21,.07,.03,'#d1a877',desk);rod([-.12,1,.65],[.12,1,.65],.025,'#967443',desk);
