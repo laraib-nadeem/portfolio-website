@@ -1,6 +1,6 @@
 (() => {
   const button=document.querySelector('#music-toggle');if(!button)return;
-  const audio=new Audio('assets/audio/local-forecast-slower.mp3');audio.loop=true;audio.preload='none';audio.volume=.10;audio.id='site-background-music';audio.hidden=true;audio.setAttribute('aria-hidden','true');document.body.append(audio);
+  const audio=new Audio('assets/audio/local-forecast-slower.mp3?v=half3');audio.loop=true;audio.preload='none';audio.volume=.10;audio.id='site-background-music';audio.hidden=true;audio.setAttribute('aria-hidden','true');document.body.append(audio);
   let enabled=false,starting=false,position=0;
   try{enabled=localStorage.getItem('laraib-music-enabled')==='true';position=Number(sessionStorage.getItem('laraib-music-position'))||0;}catch{}
   function store(){try{localStorage.setItem('laraib-music-enabled',String(enabled));if(audio.readyState)sessionStorage.setItem('laraib-music-position',String(audio.currentTime));}catch{}}
