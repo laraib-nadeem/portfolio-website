@@ -1,0 +1,21 @@
+/* The garden field opens the chat before requesting the on-screen keyboard. */
+#smiski-question{cursor:text;font-size:11px;color:#52684d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:44px}
+@media(min-width:768px){#smiski-question{font-size:13px}}
+/* Pin the mobile sheet to the visible viewport, including Safari's keyboard pan. */
+@media(max-width:767px),(pointer:coarse) and (max-width:1023px){
+ body[data-view="inside"] #study-assistant{
+  position:fixed;inset:auto;left:8px;right:auto;margin:0;
+  top:calc(var(--assistant-visible-top,0px) + var(--assistant-visible-height,100dvh) - min(580px,calc(var(--assistant-visible-height,100dvh) - 16px)) - 8px);
+  width:calc(100% - 16px);max-width:none;
+  height:min(580px,calc(var(--assistant-visible-height,100dvh) - 16px));
+  max-height:calc(var(--assistant-visible-height,100dvh) - 16px);
+  padding:12px;gap:10px;overflow:hidden;box-sizing:border-box;
+ }
+ #study-assistant #assistant-messages{flex:1 1 0;min-height:0;max-height:none;overflow-y:auto;scroll-padding-bottom:12px}
+ #study-assistant #assistant-form{flex:0 0 auto;margin:0;padding:0}
+ #study-assistant #assistant-input{min-height:44px;font-size:16px}
+ #study-assistant #assistant-send{flex:0 0 44px;min-height:44px}
+ #study-assistant.assistant-keyboard-open #assistant-suggestions,
+ #study-assistant.assistant-keyboard-open .assistant-note{display:none}
+ #study-assistant.assistant-keyboard-open #assistant-title{font-size:16px}
+}
