@@ -63,3 +63,7 @@ Two larger ladybugs follow separate smooth zigzag loops in the upper and lower g
 ### Responsive layouts
 
 `dist/assets/responsive-layout.css` leaves widths below 768px on the existing phone layout, expands stacked tablet layouts at 768px, and uses side-by-side welcome/study compositions from 1024px. Both 3D renderers resize automatically with their containers. Short screens can scroll rather than losing controls. All layouts share the same pages and URLs.
+
+### Background music
+
+“Local Forecast - Slower” by Kevin MacLeod is bundled under CC BY 4.0; the exact source, ISRC and license are in `dist/assets/audio/CREDITS.txt`. The MP3 was transcoded to 128 kbps. Visible credits appear on the welcome page, in study credits, and on the résumé page. Playback is opt-in, loops at 18% volume, and uses `preload=none` before activation. The toggle preference is stored locally, while playback time is stored for the current browser session and restored across pages. Browsers may require another gesture to resume after navigation; the music toggle remains available on every main page.
