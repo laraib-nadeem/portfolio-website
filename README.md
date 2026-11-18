@@ -59,3 +59,7 @@ Changes auto-save locally under `laraib-placement-v1`, separately for phone (<76
 Published owner placements live in `dist/assets/published-layout.js` and its matching CSS. The desktop preset comes from the exported layout; the empty phone preset preserves the phone design. The local editor starts with this published preset when no local edits exist. Sparse hand-drawn grass tufts decorate a few garden areas behind the transparent 3D room, while ladybugs crawl above it and respect Pause and reduced-motion settings.
 
 Two larger ladybugs follow separate smooth zigzag loops in the upper and lower garden. Mesh-projected bounds keep their paths outside the house, and the SVG sits behind the transparent 3D canvas as an additional safeguard. Paths adapt to panel dimensions and stay clear of the bottom question bar.
+
+### Responsive layouts
+
+`dist/assets/responsive-layout.css` leaves widths below 768px on the existing phone layout, expands stacked tablet layouts at 768px, and uses side-by-side welcome/study compositions from 1024px. Both 3D renderers resize automatically with their containers. Short screens can scroll rather than losing controls. All layouts share the same pages and URLs.
